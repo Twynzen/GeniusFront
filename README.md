@@ -1,27 +1,19 @@
-# GeniusFront
+# Objetivo:
+El objetivo de este proyecto es crear una interfaz de usuario en Angular que permita a los usuarios interactuar con la IA de gpt-3 utilizando su voz. Para ello, se utilizará la grabación de audio y su posterior conversión a formato mp4 para su procesamiento por parte de la IA. El resultado de la interacción se mostrará en pantalla para que el usuario pueda interactuar de manera efectiva con la IA y obtener una respuesta a sus preguntas o solicitudes.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.5.
+# Tecnologías utilizadas: 
 
-## Development server
+>Angular
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+>HTML
 
-## Code scaffolding
+>CSS
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+>TypeScript
 
-## Build
+>Whisper IA
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+>API de gpt-3.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Características principales:
+El proyecto permitirá al usuario grabar su voz y enviarla para su procesamiento a la IA de gpt-3. La respuesta de la IA se mostrará en pantalla, permitiendo al usuario interactuar con la IA a través de su voz. Además, se implementarán características como la transcripción de voz a texto, el reconocimiento de palabras clave y la generación de respuestas adecuadas a partir de la entrada del usuario.

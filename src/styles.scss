@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+  }
+
+  20% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+  }
+}
+
+.settings {
+  background-image: url('assets/icons/settings.svg')
+}
+
+.record-off {
+  span {
+    background-image: url('assets/icons/record_off.svg')
+  }
+}
+
+.record-on {
+  border: 1px solid red;
+  outline: none;
+  box-shadow: 0 0 0 2px red;
+  transition: box-shadow 0.3s ease-in-out;
+  animation: pulse 1.5s infinite;
+
+  span {
+    background-image: url('assets/icons/record_on.svg');
+  }
+
+}
+
+.h-screen {
+  height: 30vh;
+  top: 20vh;
+  position: relative;
+}

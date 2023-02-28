@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ChatService } from '../../services/chat.service';
+
 
 @Component({
   selector: 'app-voice-button',
@@ -7,9 +10,20 @@ import { Component } from '@angular/core';
 })
 export class VoiceButtonComponent {
 
+  messageControl = new FormControl();
+  message = '';
+
   record: boolean = false;
   recorder: any;
+  constructor(
+    private chatService: ChatService
+  ){
 
+  }
+
+  ngOnInit() {
+    this.listenMessage();
+  }
   recording(){
     this.record = !this.record;
 
@@ -34,6 +48,15 @@ export class VoiceButtonComponent {
       const tracks = this.recorder.stream.getTracks();
       tracks.forEach((track: { stop: () => any; }) => track.stop());
     }
+  }
+  listenMessage(){
+    this.messageControl.valueChanges.subscribe((value) => {
+      this.message = value;
+    });
+  }
+  sendMessage() {
+    this.chatService.sendMessage(this.message);
+    this.messageControl.setValue('');
   }
 
 

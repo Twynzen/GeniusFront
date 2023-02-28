@@ -11,7 +11,7 @@
           <textarea id="message" name="message" class="bg-gray-100 border-2 w-full p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
         </div>
         <div class="flex justify-between items-center">
-          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" (click)="sendMessage()">
             Send
           </button>
           <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" [ngClass]="record ? 'record-on' : 'record-off'"  (click)="recording()">

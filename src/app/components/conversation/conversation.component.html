@@ -11,19 +11,19 @@
       <div class="w-full h-full bg-gray-100 flex flex-col justify-end">
         <div class="mx-4 mb-2 max-w-lg">
           <div class="bg-white rounded-lg px-4 py-2 shadow">
-            <p class="text-sm font-medium text-gray-900">Usuario 1</p>
+            <p class="text-sm font-medium text-gray-900">Genius</p>
             <p class="text-sm text-gray-700">Hola, ¿cómo estás?</p>
           </div>
         </div>
-        <div class="mx-4 mb-2 max-w-lg">
+        <div class="mx-4 mb-2 max-w-lg"  *ngIf="message">
           <div class="bg-blue-500 rounded-lg px-4 py-2 shadow text-white float-right">
             <p class="text-sm font-medium">Tú</p>
-            <p class="text-sm">Estoy bien, gracias. ¿Y tú?</p>
+            <p class="text-sm">{{message}}</p>
           </div>
         </div>
         <div class="mx-4 mb-2 max-w-lg">
           <div class="bg-white rounded-lg px-4 py-2 shadow">
-            <p class="text-sm font-medium text-gray-900">Usuario 1</p>
+            <p class="text-sm font-medium text-gray-900">Genius</p>
             <p class="text-sm text-gray-700">Estoy bien también, gracias.</p>
           </div>
         </div>

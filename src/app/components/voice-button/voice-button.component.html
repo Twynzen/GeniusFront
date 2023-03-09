@@ -5,21 +5,28 @@
         <h2 class="text-lg font-semibold">Escribe aquí:</h2>
 
       </div>
-      <div class="bg-gray-200 rounded-lg p-4">
-        <div class="mb-4">
-          <label for="message" class="sr-only">Message</label>
-          <textarea id="message" name="message" class="bg-gray-100 border-2 w-full p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+      <form action=""[formGroup]="myForm">
+        <div class="bg-gray-200 rounded-lg p-4">
+          <div class="mb-4">
+            <label for="message" class="sr-only">Message</label>
+            <textarea formControlName="message" id="message" name="message"
+              class="bg-gray-100 border-2 w-full p-2 rounded-lg
+              focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+          </div>
+          <div class="flex justify-between items-center">
+            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold
+              py-2 px-4 rounded" (click)="sendMessage()">
+              Send
+            </button>
+            <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold
+              py-2 px-4 rounded inline-flex items-center" [ngClass]="record ?
+              'record-on' : 'record-off'" (click)="recording()">
+              <span class="w-4 h-4 bg-cover bg-no-repeat mr-2 inline-block"></span>
+              <span>Record</span>
+            </button>
+          </div>
         </div>
-        <div class="flex justify-between items-center">
-          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" (click)="sendMessage()">
-            Send
-          </button>
-          <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" [ngClass]="record ? 'record-on' : 'record-off'"  (click)="recording()">
-            <span class="w-4 h-4 bg-cover bg-no-repeat mr-2 inline-block"  ></span>
-            <span>Record</span>
-          </button>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

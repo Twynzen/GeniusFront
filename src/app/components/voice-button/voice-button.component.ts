@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChatService } from '../../services/chat.service';
 
 
@@ -16,14 +16,21 @@ export class VoiceButtonComponent {
   record: boolean = false;
   recorder: any;
   constructor(
-    private chatService: ChatService
+    private chatService: ChatService,
+    public myForm: FormGroup
   ){
 
   }
 
+
   ngOnInit() {
+    this.myForm = new FormGroup({
+      message: new FormControl('', Validators.required),
+      record: new FormControl(false)
+    });
     this.listenMessage();
   }
+
   recording(){
     this.record = !this.record;
 

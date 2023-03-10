@@ -11,24 +11,24 @@ import { ChatService } from '../../services/chat.service';
 export class VoiceButtonComponent {
 
   messageControl = new FormControl();
-  message = '';
+  message = 'Hola!';
 
   record: boolean = false;
   recorder: any;
   constructor(
     private chatService: ChatService,
-    public myForm: FormGroup
+
   ){
 
   }
+  myForm = new FormGroup({
+    message: new FormControl(this.message, Validators.required),
+    record: new FormControl(false)
+  });
 
 
   ngOnInit() {
-    this.myForm = new FormGroup({
-      message: new FormControl('', Validators.required),
-      record: new FormControl(false)
-    });
-    this.listenMessage();
+
   }
 
   recording(){
@@ -56,14 +56,12 @@ export class VoiceButtonComponent {
       tracks.forEach((track: { stop: () => any; }) => track.stop());
     }
   }
-  listenMessage(){
-    this.messageControl.valueChanges.subscribe((value) => {
-      this.message = value;
-    });
-  }
+
+
   sendMessage() {
+    this.message != this.myForm.get('message')!.value;
     this.chatService.sendMessage(this.message);
-    this.messageControl.setValue('');
+    this.myForm.get('message')?.patchValue('')
   }
 
 

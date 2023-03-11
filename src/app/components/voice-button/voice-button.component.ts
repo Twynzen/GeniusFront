@@ -60,6 +60,8 @@ export class VoiceButtonComponent {
 
   sendMessage() {
     this.message != this.myForm.get('message')!.value;
+    console.log(this.message);
+
     this.chatService.sendMessage(this.message);
     this.myForm.get('message')?.patchValue('')
   }

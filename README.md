@@ -17,3 +17,18 @@ El objetivo de este proyecto es crear una interfaz de usuario en Angular que per
 
 # Características principales:
 El proyecto permitirá al usuario grabar su voz y enviarla para su procesamiento a la IA de gpt-3. La respuesta de la IA se mostrará en pantalla, permitiendo al usuario interactuar con la IA a través de su voz. Además, se implementarán características como la transcripción de voz a texto, el reconocimiento de palabras clave y la generación de respuestas adecuadas a partir de la entrada del usuario.
+
+# Pruebas de diferentes modelos
+Estuve valdiando entre estos modelos
+
+  >GPT_MODEL_DAVINCI: 'text-davinci-003',
+  >GPT_TURBO: 'gpt-3.5-turbo'
+  
+El GPT_TURBO tiene una logica completamente diferente.
+
+
+# Errores a revisar:
+1. El texto que se envía al servicio de chatService no esta lelgando, siempre envía el placeholder
+2. Verificar forma optima de envíar mensajes al char de conversación para ser visualizado
+
+

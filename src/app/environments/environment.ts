@@ -1,4 +1,4 @@
 
 export const environment = {
-  GPT_API_KEY: '',
+  GPT_API_KEY: 'noni',
 };

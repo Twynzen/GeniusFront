@@ -22,28 +22,50 @@ export class ChatService {
   constructor() { }
 
   async sendMessage(prompt: string) {
-    const response = await this.openai.createCompletion({
-      prompt: SECRET_PROMPT.FIRST_INSTRUCTION + prompt,
-      model: engines.GPT_MODEL_DAVINCI,
-      max_tokens: 200,
-      temperature: 0.9,
-    })
+    let gptTurbo: boolean = true;
 
-    if (response.data) {
-      let isArray: any = Array.isArray(response.data.choices) && response.data.choices.length > 0;
-      const responseIA: string | undefined = response.data.choices[0].text;
-      if (isArray) {
-        this.currentAiResponse != responseIA;
-        console.log(response.data, "DATA");
-        console.log(responseIA, "Respuesta del modelo");
-        return
-      } else {
-        console.log(response.data, "DATA");
-        console.error("El choices no es un array o está vacío");
-        return
+
+
+    if (gptTurbo) {
+      const response = await this.openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: 'user',
+           content: prompt
+           }
+        ]
+      })
+      console.log(prompt,"lo que digo yo");
+
+      console.log(response.data.choices[0].message?.content,"respuesta");
+
+    } else {
+
+      const response = await this.openai.createCompletion({
+        prompt: SECRET_PROMPT.FIRST_INSTRUCTION + prompt,
+        model: engines.GPT_TURBO,
+        max_tokens: 200,
+        temperature: 0.9,
+      })
+
+      if (response.data) {
+        let isArray: any = Array.isArray(response.data.choices) && response.data.choices.length > 0;
+        const responseIA: string | undefined = response.data.choices[0].text;
+        if (isArray) {
+          this.currentAiResponse != responseIA;
+          console.log(response.data, "DATA");
+          console.log(responseIA, "Respuesta del modelo");
+          return
+        } else {
+          console.log(response.data, "DATA");
+          console.error("El choices no es un array o está vacío");
+          return
+        }
+
       }
-
     }
+
   }
 
 

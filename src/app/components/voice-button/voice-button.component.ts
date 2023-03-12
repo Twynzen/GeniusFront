@@ -11,24 +11,21 @@ import { ChatService } from '../../services/chat.service';
 export class VoiceButtonComponent {
 
   messageControl = new FormControl();
-  message = 'Hola!';
-
+  message = 'Hola saluda a cascabot';
+  resIa?:string;
   record: boolean = false;
   recorder: any;
   constructor(
     private chatService: ChatService,
-
   ){
 
   }
   myForm = new FormGroup({
-    message: new FormControl(this.message, Validators.required),
+    message: new FormControl('', Validators.required),
     record: new FormControl(false)
   });
 
-
   ngOnInit() {
-
   }
 
   recording(){
@@ -39,7 +36,6 @@ export class VoiceButtonComponent {
         .then((stream) => {
           this.recorder = new MediaRecorder(stream);
           this.recorder.start();
-
           this.recorder.ondataavailable = (event: { data: any; }) => {
             const blob = event.data;
             const file = new File([blob], 'recording.mp3', { type: 'audio/mp3' });
@@ -57,14 +53,15 @@ export class VoiceButtonComponent {
     }
   }
 
-
   sendMessage() {
-    this.message != this.myForm.get('message')!.value;
-    console.log(this.message);
+    const message = this.myForm.get('message')?.value;
+    if (message) {
+       this.chatService.sendMessage(message).then((res: any )=> {
+         this.resIa = res;
+      });;
+      console.log(this.resIa,"tuuu");
 
-    this.chatService.sendMessage(this.message);
-    this.myForm.get('message')?.patchValue('')
+      this.myForm.patchValue({ message: '' });
+    }
   }
-
-
 }

@@ -3,6 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
@@ -44,8 +50,3 @@
 
 }
 
-.h-screen {
-  height: 30vh;
-  top: 20vh;
-  position: relative;
-}

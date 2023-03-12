@@ -18,55 +18,75 @@ export class ChatService {
   currentAiResponse: string = '';
   messageSubject = new Subject<string>();
   prompt: string = ''
+  responseIa: string = '';
 
   constructor() { }
 
-  async sendMessage(prompt: string) {
+  sendMessage(prompt: string): any{
     let gptTurbo: boolean = true;
-
-
+    let gptDavinci: boolean = false;
 
     if (gptTurbo) {
-      const response = await this.openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: 'user',
-           content: prompt
-           }
-        ]
-      })
-      console.log(prompt,"lo que digo yo");
+      let resIa: any = this.gptTurboEngine(prompt);;
 
-      console.log(response.data.choices[0].message?.content,"respuesta");
+      return resIa;
+
+    } else if(gptDavinci) {
+      let resIa: any = this.davinciEngine(prompt);
+
+      return resIa
+
+    }else{
+      return '';
+    }
+
+
+  }
+
+  async gptTurboEngine(prompt: string): Promise<string> {
+    const response = await this.openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: 'user',
+          content: SECRET_PROMPT.FIRST_INSTRUCTION + prompt
+        }
+      ]
+    })
+    console.log(prompt, "lo que digo yo");
+
+    console.log(response.data.choices[0].message?.content, "respuesta");
+    return response.data.choices[0].message?.content!
+  }
+  async davinciEngine(prompt: string): Promise<string> {
+
+    const response = await this.openai.createCompletion({
+      prompt: SECRET_PROMPT.FIRST_INSTRUCTION + prompt,
+      model: engines.GPT_TURBO,
+      max_tokens: 200,
+      temperature: 0.9,
+    })
+
+    if (response.data) {
+      let isArray: any = Array.isArray(response.data.choices) && response.data.choices.length > 0;
+      const responseIA: string | undefined = response.data.choices[0].text;
+      if (isArray && responseIA) {
+        console.log(response.data, "DATA");
+        console.log(responseIA, "Respuesta del modelo");
+        return responseIA;
+      } else {
+        console.log(response.data, "DATA");
+        console.error("El choices no es un array o está vacío");
+        return 'Error';
+      }
 
     } else {
-
-      const response = await this.openai.createCompletion({
-        prompt: SECRET_PROMPT.FIRST_INSTRUCTION + prompt,
-        model: engines.GPT_TURBO,
-        max_tokens: 200,
-        temperature: 0.9,
-      })
-
-      if (response.data) {
-        let isArray: any = Array.isArray(response.data.choices) && response.data.choices.length > 0;
-        const responseIA: string | undefined = response.data.choices[0].text;
-        if (isArray) {
-          this.currentAiResponse != responseIA;
-          console.log(response.data, "DATA");
-          console.log(responseIA, "Respuesta del modelo");
-          return
-        } else {
-          console.log(response.data, "DATA");
-          console.error("El choices no es un array o está vacío");
-          return
-        }
-
-      }
+      console.error("El choices no es un array o está vacío");
+      return 'Error';
     }
 
   }
+
 
 
 

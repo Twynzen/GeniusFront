@@ -23,12 +23,12 @@ Estuve valdiando entre estos modelos
 
   >GPT_MODEL_DAVINCI: 'text-davinci-003',
   >GPT_TURBO: 'gpt-3.5-turbo'
-  
+
 El GPT_TURBO tiene una logica completamente diferente.
 
 
 # Errores a revisar:
-1. El texto que se envía al servicio de chatService no esta lelgando, siempre envía el placeholder
+1. Animación de exritura de texto
 2. Verificar forma optima de envíar mensajes al char de conversación para ser visualizado
-
+3. Revisar librerias de encriptación
 

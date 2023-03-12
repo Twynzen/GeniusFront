@@ -1,32 +1,76 @@
-<div class="flex h-screen items-center justify-center">
-  <div class="bg-white shadow-lg rounded-lg w-3/4 md:w-1/2 lg:w-1/3">
-    <div class="p-4">
+<div class="container-chat ">
+  <!-- Conversation -->
+  <div class="flex h-full justify-center">
+    <div class="shadow rounded-lg conversation">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-lg font-semibold">Escribe aquí:</h2>
-
+        <h2 class="text-lg font-semibold text-center block">Genius</h2>
+        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold
+          py-2 px-4 rounded inline-flex items-center">
+          <span class="w-4 h-4 bg-cover bg-no-repeat mr-2 inline-block
+            settings"></span>
+          <span>Settings</span>
+        </button>
       </div>
-      <form action=""[formGroup]="myForm">
-        <div class="bg-gray-200 rounded-lg p-4">
-          <div class="mb-4">
-            <label for="message" class="sr-only">Message</label>
-            <textarea formControlName="message" id="message" name="message"
-              class="bg-gray-100 border-2 w-full p-2 rounded-lg
-              focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+      <div class="bg-gray-200 rounded-lg p-4">
+        <div class="w-full h-full bg-gray-100 flex flex-col justify-end">
+          <div class="mx-4 mb-2 max-w-lg">
+            <div class="bg-white rounded-lg px-4 py-2 shadow">
+              <p class="text-sm font-medium text-gray-900">Genius</p>
+              <p class="text-sm text-gray-700">Hola, ¿cómo estás?</p>
+            </div>
           </div>
-          <div class="flex justify-between items-center">
-            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold
-              py-2 px-4 rounded" (click)="sendMessage()">
-              Send
-            </button>
-            <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold
-              py-2 px-4 rounded inline-flex items-center" [ngClass]="record ?
-              'record-on' : 'record-off'" (click)="recording()">
-              <span class="w-4 h-4 bg-cover bg-no-repeat mr-2 inline-block"></span>
-              <span>Record</span>
-            </button>
+          <div class="mx-4 mb-2 max-w-lg" *ngIf="message">
+            <div class="bg-blue-500 rounded-lg px-4 py-2 shadow text-white
+              float-right">
+              <p class="text-sm font-medium">Tú</p>
+              <p class="text-sm">{{resIa}}</p>
+            </div>
+          </div>
+          <div class="mx-4 mb-2 max-w-lg">
+            <div class="bg-white rounded-lg px-4 py-2 shadow">
+              <p class="text-sm font-medium text-gray-900">Genius</p>
+              <p class="text-sm text-gray-700">Estoy bien también, gracias.</p>
+            </div>
           </div>
         </div>
-      </form>
+      </div>
+    </div>
+    <!-- chat -->
+
+    <div class="flex items-center justify-center chat">
+      <div class="bg-white shadow-lg rounded-lg  w-screen">
+        <div class="p-4">
+
+          <form [formGroup]="myForm">
+            <div class="bg-gray-200 rounded-lg p-4">
+              <div class="mb-4">
+                <label for="message" class="sr-only">Message</label>
+                <textarea formControlName="message" placeholder="Escribe aquí"
+                  id="message" name="message"
+                  class="bg-gray-100 border-2 w-full p-2 rounded-lg
+                  focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+              </div>
+              <div class="flex justify-between items-center">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white
+                  font-bold
+                  py-2 px-4 rounded" (click)="sendMessage()">
+                  Send
+                </button>
+                <button class="bg-gray-200 hover:bg-gray-300 text-gray-800
+                  font-bold
+                  py-2 px-4 rounded inline-flex items-center" [ngClass]="record
+                  ?
+                  'record-on' : 'record-off'" (click)="recording()">
+                  <span class="w-4 h-4 bg-cover bg-no-repeat mr-2 inline-block"></span>
+                  <span>Record</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+
+
 </div>

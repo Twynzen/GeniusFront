@@ -29,6 +29,8 @@ El GPT_TURBO tiene una logica completamente diferente.
 
 # Errores a revisar:
 1. Animación de exritura de texto
-2. Verificar forma optima de envíar mensajes al char de conversación para ser visualizado
-3. Revisar librerias de encriptación
-
+2. Revisar librerias de encriptación
+3. Quiero controlar los tiempos en los que se realiza la petición o envío y llegada de datos.
+4. Gestionar data que lelga de el engine gpt-3turbo por que creo que necesita recordar la conversación.
+5. Explorar posibles riesgos al ser atacado con muchos ataques o que se realice una petición ciclica que cause una perdida de dinero grande.
+6. Sensor de emociones a tra vez de texto, analaizar emoción que expresa la persona que escribe 

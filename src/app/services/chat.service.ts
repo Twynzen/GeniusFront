@@ -49,7 +49,7 @@ export class ChatService {
       messages: [
         {
           role: 'user',
-          content: SECRET_PROMPT.FIRST_INSTRUCTION + prompt
+          content: SECRET_PROMPT.SECONT_INSTRUCTION + prompt
         }
       ]
     })

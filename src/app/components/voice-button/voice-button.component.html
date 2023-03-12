@@ -14,24 +14,12 @@
       <div class="bg-gray-200 rounded-lg p-4">
         <div class="w-full h-full bg-gray-100 flex flex-col justify-end">
           <div class="mx-4 mb-2 max-w-lg">
-            <div class="bg-white rounded-lg px-4 py-2 shadow">
-              <p class="text-sm font-medium text-gray-900">Genius</p>
-              <p class="text-sm text-gray-700">Hola, ¿cómo estás?</p>
+            <div class="bg-white rounded-lg px-4 py-2 shadow" *ngIf="resIa">
+              <p class="text-sm font-medium text-gray-900">IA</p>
+              <p class="text-sm text-gray-700">{{resIa}}</p>
             </div>
           </div>
-          <div class="mx-4 mb-2 max-w-lg" *ngIf="message">
-            <div class="bg-blue-500 rounded-lg px-4 py-2 shadow text-white
-              float-right">
-              <p class="text-sm font-medium">Tú</p>
-              <p class="text-sm">{{resIa}}</p>
-            </div>
-          </div>
-          <div class="mx-4 mb-2 max-w-lg">
-            <div class="bg-white rounded-lg px-4 py-2 shadow">
-              <p class="text-sm font-medium text-gray-900">Genius</p>
-              <p class="text-sm text-gray-700">Estoy bien también, gracias.</p>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>

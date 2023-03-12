@@ -57,9 +57,9 @@ export class VoiceButtonComponent {
     const message = this.myForm.get('message')?.value;
     if (message) {
        this.chatService.sendMessage(message).then((res: any )=> {
+        this.resIa = ''
          this.resIa = res;
       });;
-      console.log(this.resIa,"tuuu");
 
       this.myForm.patchValue({ message: '' });
     }

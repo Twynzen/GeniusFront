@@ -49,19 +49,19 @@ export class ChatService {
       messages: [
         {
           role: 'user',
-          content: SECRET_PROMPT.SECONT_INSTRUCTION + prompt
+          content: SECRET_PROMPT.FILO_GUTIERREZ + prompt
         }
       ]
     })
     console.log(prompt, "lo que digo yo");
 
-    console.log(response.data.choices[0].message?.content, "respuesta");
-    return response.data.choices[0].message?.content!
+    console.log(response.data, "respuesta");
+    return response.data.choices[0].message?.content!;
   }
   async davinciEngine(prompt: string): Promise<string> {
 
     const response = await this.openai.createCompletion({
-      prompt: SECRET_PROMPT.FIRST_INSTRUCTION + prompt,
+      prompt: SECRET_PROMPT.FILO_GUTIERREZ+ prompt,
       model: engines.GPT_TURBO,
       max_tokens: 200,
       temperature: 0.9,

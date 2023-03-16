@@ -1,4 +1,4 @@
 
 export const environment = {
-  GPT_API_KEY: 'nohayapi:v',
+  GPT_API_KEY: 'sk-SgrnC8O3m',
 };

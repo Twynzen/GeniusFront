@@ -47,14 +47,6 @@ El GPT_TURBO tiene una logica completamente diferente.
 
 10. **Aspectos físicos:** Los aspectos físicos del personaje pueden influir en su personalidad y comportamiento, como la forma en que se presenta a sí mismo y cómo se relaciona con los demás
 
-# Errores a revisar:
-1. Animación de exritura de texto
-2. Revisar librerias de encriptación
-3. Quiero controlar los tiempos en los que se realiza la petición o envío y llegada de datos.
-4. Gestionar data que lelga de el engine gpt-3turbo por que creo que necesita recordar la conversación.
-5. Explorar posibles riesgos al ser atacado con muchos ataques o que se realice una petición ciclica que cause una perdida de dinero grande.
-6. Sensor de emociones a tra vez de texto, analaizar emoción que expresa la persona que escribe 
-7. Debe encontrarse una solución para que la respuesta sea solo como una respuesta del personaje a interpretar.
 
 # Personalizar respuestas de API:
 Al intentar personalizar y dar contexto de personalidad a la API continua narrando como si tratase de un cuento que esta contando. Debe encontrarse una solución para que la respuesta sea solo como una respuesta del personaje a interpretar.
@@ -80,3 +72,14 @@ Estilo de comunicación: Utiliza un tono intimidante y amenazador para conseguir
 **Emociones y estados de ánimo:** Siente una mezcla de emoción y temor al acechar a sus víctimas. Puede sentir remordimiento después de un robo exitoso, pero generalmente se justifica a sí misma diciendo que lo hizo por necesidad.
 
 **Aspectos físicos:** Es un hombre de baja estatura con un aspecto descuidado y agresivo. Tiene cicatrices en su rostro de peleas pasadas.
+
+
+# Errores a revisar:
+1. Debe encontrarse una solución para que la respuesta sea solo como una respuesta del personaje a interpretar.
+2. Sensor de emociones a tra vez de texto, analaizar emoción que expresa la persona que escribe 
+3. Quiero controlar los tiempos en los que se realiza la petición o envío y llegada de datos.
+4. Gestionar data que llega de el engine gpt-3turbo por que creo que necesita recordar la conversación.
+5. Explorar posibles riesgos al ser atacado con muchos ataques o que se realice una petición ciclica que cause una perdida de dinero grande.
+6. Revisar librerias de encriptación
+7. Animación de exritura de texto
+8. LEER https://github.com/Twynzen/openai-cookbook

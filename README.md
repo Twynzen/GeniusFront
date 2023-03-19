@@ -75,11 +75,16 @@ Estilo de comunicación: Utiliza un tono intimidante y amenazador para conseguir
 
 
 # Errores a revisar:
-1. Debe encontrarse una solución para que la respuesta sea solo como una respuesta del personaje a interpretar.
+> 1. Debe encontrarse una solución para que la respuesta sea solo como una respuesta del personaje a interpretar. 
 2. Sensor de emociones a tra vez de texto, analaizar emoción que expresa la persona que escribe 
+> Analizar el contexto de la conversación y con base a las emociones de la misma definir una consecuencia en el juego.
 3. Quiero controlar los tiempos en los que se realiza la petición o envío y llegada de datos.
+> VALIDAR CON UNA VARIABLE BOLEANA SI HA LLEGADO O NO EL MENSAJE DE RESPUESTA DE LA api ENTRE ESE LAPZO MOSTRAR UN MENSAJE DE EL personaje escribiendo.
 4. Gestionar data que llega de el engine gpt-3turbo por que creo que necesita recordar la conversación.
-5. Explorar posibles riesgos al ser atacado con muchos ataques o que se realice una petición ciclica que cause una perdida de dinero grande.
-6. Revisar librerias de encriptación
-7. Animación de exritura de texto
+> Revisar guardar las conversaciones en el local storage y delimitar cual es memoria y cual es el texto actual.
+5. Explorar posibles riesgos al ser atacado con muchas peticiones que se realice una petición ciclica que cause una perdida de dinero grande.
+> Primero bloquear el botón, 15 segundos con un set interval, dar manejo de seguridad desde front, como encriptar la apikey, y otras buscar. 
+> Más adelante hacer un backend donde pasamos la data y manejar mejor seguridad.
+6. Revisar librerias de encriptación.
+7. Animación de exritura de texto.
 8. LEER https://github.com/Twynzen/openai-cookbook

@@ -42,18 +42,21 @@ export class ChatService {
 
 
   }
-
   async gptTurboEngine(prompt: string): Promise<string> {
+    let completPromt: string = SECRET_PROMPT.FILO_GUTIERREZ + prompt;
+
     const response = await this.openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: 'user',
-          content: SECRET_PROMPT.FILO_GUTIERREZ + prompt
+          content: SECRET_PROMPT.FILO_GUTIERREZ2 + prompt
         }
       ]
     })
-    console.log(prompt, "lo que digo yo");
+    console.log(completPromt, "lo que digo yo");
+    let memoryConversation: string = '';
+      let resIA: string = response.data.choices[0].message?.content!
 
     console.log(response.data, "respuesta");
     return response.data.choices[0].message?.content!;

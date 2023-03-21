@@ -14,3 +14,27 @@
   bottom: 0;
   width: 100%;
 }
+@keyframes generacion-personaje {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+    transform: translate3d(0, -10px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.generacion-personaje {
+  background-color: red;
+  opacity: 0;
+  animation-name: generacion-personaje;
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}

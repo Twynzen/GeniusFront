@@ -6,10 +6,13 @@ import { environment } from '../environments/environment';
 import { SECRET_PROMPT } from '../constants/secret-prompt';
 import { engines } from '../constants/engines';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
+  private inicioProceso = new Subject<void>();
+  private finProceso = new Subject<void>();
 
   configuration = new Configuration({
     apiKey: environment.GPT_API_KEY
@@ -19,8 +22,17 @@ export class ChatService {
   messageSubject = new Subject<string>();
   prompt: string = ''
   responseIa: string = '';
+  mostrarAnimacion:boolean = false;
 
   constructor() { }
+
+  get inicioProceso$() {
+    return this.inicioProceso.asObservable();
+  }
+
+  get finProceso$() {
+    return this.finProceso.asObservable();
+  }
 
   sendMessage(prompt: string): any{
     let gptTurbo: boolean = true;
@@ -43,14 +55,16 @@ export class ChatService {
 
   }
   async gptTurboEngine(prompt: string): Promise<string> {
-    let completPromt: string = SECRET_PROMPT.FILO_GUTIERREZ + prompt;
+    this.inicioProceso.next(); // Notificar inicio del proceso
+    this.mostrarAnimacion =true;
+    let completPromt: string = SECRET_PROMPT.FILO_GUTIERREZ2 + prompt;
 
     const response = await this.openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: 'user',
-          content: SECRET_PROMPT.FILO_GUTIERREZ2 + prompt
+          content: completPromt
         }
       ]
     })
@@ -59,6 +73,8 @@ export class ChatService {
       let resIA: string = response.data.choices[0].message?.content!
 
     console.log(response.data, "respuesta");
+    this.mostrarAnimacion = true;
+    this.finProceso.next(); // Notificar fin del proceso
     return response.data.choices[0].message?.content!;
   }
   async davinciEngine(prompt: string): Promise<string> {

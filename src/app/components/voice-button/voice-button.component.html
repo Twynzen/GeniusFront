@@ -23,10 +23,14 @@
         </div>
       </div>
     </div>
+    <div class="generacion-personaje" *ngIf="mostrarAnimacion">
+      hola
+      <!-- Aquí iría el personaje de Matrix -->
+    </div>
     <!-- chat -->
 
     <div class="flex items-center justify-center chat">
-      <div class="bg-white shadow-lg rounded-lg  w-screen">
+      <div class="bg-white shadow-lg rounded-lg w-screen">
         <div class="p-4">
 
           <form [formGroup]="myForm">

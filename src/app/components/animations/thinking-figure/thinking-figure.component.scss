@@ -1,0 +1,83 @@
+.pharaoh {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  background-color: #f5dcb4;
+  border: 5px solid #000;
+}
+
+.pharaoh__face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 150px;
+  background-color: #f5dcb4;
+  transform: translate(-50%, -50%);
+}
+
+.pharaoh__eye {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  animation: blink 3s infinite;
+}
+
+.pharaoh__eye--left {
+  top: 40%;
+  left: 30%;
+}
+
+.pharaoh__eye--right {
+  top: 40%;
+  left: 70%;
+}
+
+@keyframes blink {
+
+  0%,
+  45%,
+  75%,
+  100% {
+    opacity: 1;
+  }
+
+  50%,
+  80% {
+    opacity: 0;
+  }
+}
+
+.pharaoh__clock {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #000;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pharaoh__hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  background-color: #fff;
+  transform-origin: 100%;
+  animation: rotate 12s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

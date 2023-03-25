@@ -23,9 +23,10 @@
         </div>
       </div>
     </div>
-    <div class="generacion-personaje" *ngIf="mostrarAnimacion">
-      hola
-      <!-- Aquí iría el personaje de Matrix -->
+
+    <div class="overlay" *ngIf="showAnimation">
+      <!-- <app-walkin-loader></app-walkin-loader> -->
+      <app-thinking-figure></app-thinking-figure>
     </div>
     <!-- chat -->
 

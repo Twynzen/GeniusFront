@@ -54,6 +54,7 @@ export class ChatService {
 
 
   }
+
   async gptTurboEngine(prompt: string): Promise<string> {
     this.inicioProceso.next(); // Notificar inicio del proceso
     this.mostrarAnimacion =true;
@@ -77,6 +78,7 @@ export class ChatService {
     this.finProceso.next(); // Notificar fin del proceso
     return response.data.choices[0].message?.content!;
   }
+
   async davinciEngine(prompt: string): Promise<string> {
 
     const response = await this.openai.createCompletion({

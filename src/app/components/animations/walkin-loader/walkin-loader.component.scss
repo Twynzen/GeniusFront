@@ -1,0 +1,90 @@
+.walking-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  animation: walk 1s linear infinite;
+}
+
+.head,
+.body,
+.arm-left,
+.arm-right,
+.leg-left,
+.leg-right {
+  background-color: #3498db;
+  position: absolute;
+}
+
+.head {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  top: 0;
+}
+
+.body {
+  width: 10px;
+  height: 30px;
+  top: 20px;
+}
+
+.arm-left,
+.arm-right {
+  width: 20px;
+  height: 5px;
+  top: 25px;
+}
+
+.arm-left {
+  transform-origin: right;
+  animation: swing 0.5s linear infinite alternate;
+}
+
+.arm-right {
+  left: 10px;
+  transform-origin: left;
+  animation: swing 0.5s linear infinite alternate-reverse;
+}
+
+.leg-left,
+.leg-right {
+  width: 5px;
+  height: 30px;
+  top: 50px;
+}
+
+.leg-left {
+  transform-origin: top;
+  animation: swing 0.5s linear infinite alternate;
+}
+
+.leg-right {
+  left: 5px;
+  transform-origin: top;
+  animation: swing 0.5s linear infinite alternate-reverse;
+}
+
+@keyframes walk {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(45deg);
+  }
+}

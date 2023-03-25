@@ -10,7 +10,7 @@ import { ChatService } from '../../services/chat.service';
 })
 export class VoiceButtonComponent {
 
-  mostrarAnimacion = false;
+  showAnimation = false;
   messageControl = new FormControl();
   message = 'Hola saluda a cascabot';
   resIa?:string;
@@ -28,11 +28,11 @@ export class VoiceButtonComponent {
 
   ngOnInit() {
     this.chatService.inicioProceso$.subscribe(() => {
-      this.mostrarAnimacion = true;
+      this.showAnimation = true;
     });
 
     this.chatService.finProceso$.subscribe(() => {
-      this.mostrarAnimacion = false;
+      this.showAnimation = false;
     });
   }
 

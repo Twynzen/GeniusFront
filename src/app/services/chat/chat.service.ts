@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Configuration, OpenAIApi } from "openai";
 import * as dotenv from 'dotenv';
-import { environment } from '../environments/environment';
-import { SECRET_PROMPT } from '../constants/secret-prompt';
-import { engines } from '../constants/engines';
+import { environment } from '../../environments/environment';
+import { SECRET_PROMPT } from '../../constants/secret-prompt';
+import { engines } from '../../constants/engines';
 
 
 @Injectable({
@@ -57,8 +57,8 @@ export class ChatService {
 
   async gptTurboEngine(prompt: string): Promise<string> {
     this.inicioProceso.next(); // Notificar inicio del proceso
-    this.mostrarAnimacion =true;
-    let completPromt: string = SECRET_PROMPT.FILO_GUTIERREZ2 + prompt;
+    this.mostrarAnimacion = true;
+    let completPromt: string = SECRET_PROMPT.EMOTION_FILTER + prompt;
 
     const response = await this.openai.createChatCompletion({
       model: "gpt-3.5-turbo",

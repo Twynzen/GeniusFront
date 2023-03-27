@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ChatService } from '../../services/chat.service';
+import { ChatService } from '../../services/chat/chat.service';
 
 @Component({
   selector: 'app-conversation',

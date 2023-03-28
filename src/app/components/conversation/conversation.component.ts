@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmotionDetectorService } from 'src/app/services/emotionDetector/emotion-detector.service';
 import { ChatService } from '../../services/chat/chat.service';
 
 @Component({
@@ -7,10 +8,11 @@ import { ChatService } from '../../services/chat/chat.service';
   styleUrls: ['./conversation.component.scss']
 })
 export class ConversationComponent {
-  message = '';
+  message: string = '';
 
   constructor(
-    private chatService: ChatService
+    private chatService: ChatService,
+
   ) {
 
   }
@@ -23,5 +25,7 @@ export class ConversationComponent {
       this.message = message;
     });
   }
+
+
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EmotionDetectorService } from 'src/app/services/emotionDetector/emotion-detector.service';
 import { ChatService } from '../../services/chat/chat.service';
 
 
@@ -13,11 +14,14 @@ export class VoiceButtonComponent {
   showAnimation = false;
   messageControl = new FormControl();
   message = 'Hola saluda a cascabot';
+  feeling: string = ''
   resIa?:string;
   record: boolean = false;
   recorder: any;
   constructor(
     private chatService: ChatService,
+    private emotionService: EmotionDetectorService
+
   ){
 
   }
@@ -65,11 +69,19 @@ export class VoiceButtonComponent {
     const message = this.myForm.get('message')?.value;
     if (message) {
        this.chatService.sendMessage(message).then((res: any )=> {
-        this.resIa = ''
          this.resIa = res;
-      });;
+         if (this.resIa) {
+           this.getFeeling(this.resIa);
+         }
+      });
 
       this.myForm.patchValue({ message: '' });
     }
+  }
+
+  getFeeling(message: string) {
+    this.emotionService.getFeeling(message).then((res: any) => {
+      this.feeling = res;
+    });
   }
 }

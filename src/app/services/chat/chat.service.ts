@@ -58,7 +58,7 @@ export class ChatService {
   async gptTurboEngine(prompt: string): Promise<string> {
     this.inicioProceso.next(); // Notificar inicio del proceso
     this.mostrarAnimacion = true;
-    let completPromt: string = SECRET_PROMPT.EMOTION_FILTER + prompt;
+    let completPromt: string = SECRET_PROMPT.FILO_GUTIERREZ2 + prompt;
 
     const response = await this.openai.createChatCompletion({
       model: "gpt-3.5-turbo",

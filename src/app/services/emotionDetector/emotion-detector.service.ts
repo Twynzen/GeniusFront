@@ -19,7 +19,7 @@ export class EmotionDetectorService {
 
   constructor() { }
 
-  async gptTurboEngine(prompt: string): Promise<string> {
+  async getFeeling(prompt: string): Promise<string> {
     this.inicioProceso.next(); // Notificar inicio del proceso
     this.mostrarAnimacion = true;
     let completPromt: string = SECRET_PROMPT.EMOTION_FILTER + prompt;
@@ -40,6 +40,6 @@ export class EmotionDetectorService {
     console.log(response.data, "respuesta de emoción catalogada");
     this.mostrarAnimacion = true;
     this.finProceso.next(); // Notificar fin del proceso
-    return response.data.choices[0].message?.content!;
+    return resIA;
   }
 }

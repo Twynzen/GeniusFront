@@ -14,7 +14,8 @@ export class VoiceButtonComponent {
   showAnimation = false;
   messageControl = new FormControl();
   message = 'Hola saluda a cascabot';
-  feeling: string = ''
+  feeling: string = '';
+  audioFile: File | null = null;
   resIa?:string;
   record: boolean = false;
   recorder: any;
@@ -52,7 +53,7 @@ export class VoiceButtonComponent {
             const blob = event.data;
             const file = new File([blob], 'recording.mp3', { type: 'audio/mp3' });
 
-            console.log(file); // Aquí puedes enviar el archivo al backend
+            this.audioFile = file;
           }
         });
     } else {

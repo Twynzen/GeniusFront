@@ -73,6 +73,10 @@ Estilo de comunicación: Utiliza un tono intimidante y amenazador para conseguir
 
 **Aspectos físicos:** Es un hombre de baja estatura con un aspecto descuidado y agresivo. Tiene cicatrices en su rostro de peleas pasadas.
 
+# Reconocimiento de voz a texto 
+> Intente con esta libreria pero saca muchos problemas: @ng-web-apis/speech
+> Estoy aprovechando el uso de whisper para esta solución. Ya que tengo el acceso de API openai, me arroraré tiempo. https://lablab.ai/t/chatgpt-tutorial-how-to-integrate-chatgpt-and-whisper-api-into-your-project
+
 
 # Errores a revisar:
 > 1. Debe encontrarse una solución para que la respuesta sea solo como una respuesta del personaje a interpretar. 

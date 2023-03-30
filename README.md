@@ -51,6 +51,25 @@ El GPT_TURBO tiene una logica completamente diferente.
 # Personalizar respuestas de API:
 Al intentar personalizar y dar contexto de personalidad a la API continua narrando como si tratase de un cuento que esta contando. Debe encontrarse una solución para que la respuesta sea solo como una respuesta del personaje a interpretar.
 
+Esta es la estructura recomendada por GPT-4:
+```js
+const context = `Personaje principal: Sebastián "El Escurridizo" Rojas
+Edad: 28 años
+Origen: Bogotá, Colombia
+Apariencia: ...
+Habilidades: ...
+Trasfondo: ...
+Objetivo en el videojuego: ...
+
+Esta es la conversación anterior:
+[Usuario] Cuéntame más sobre las habilidades de Sebastián.
+[gpt-3.5-turbo] Sebastián es extremadamente ágil, lo que le permite trepar por paredes, saltar de tejado en tejado y esquivar obstáculos con facilidad. También es un experto en cerraduras y un maestro del disfraz, lo que le permite infiltrarse en lugares y obtener información sin levantar sospechas. Además, es un estratega que planifica meticulosamente sus robos.
+`;
+
+const prompt = `${context}[Usuario] ¿Qué tipo de enemigos enfrentará Sebastián en el videojuego?`;
+
+```
+
 # Personaje hipotetico: **Juan Carlos "El Filo" Gutiérrez**
 
 **Historia de vida:** Juan Carlos creció en una familia pobre en Bogotá, Colombia. Abandonó la escuela a temprana edad y comenzó a trabajar como vendedor ambulante, pero pronto se convirtió en un ladrón.

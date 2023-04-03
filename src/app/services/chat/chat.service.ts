@@ -22,6 +22,7 @@ export class ChatService {
   messageSubject = new Subject<string>();
   prompt: string = ''
   responseIa: string = '';
+  conversationMemory:string='';
   mostrarAnimacion:boolean = false;
 
   constructor() { }
@@ -56,10 +57,11 @@ export class ChatService {
   }
 
   async gptTurboEngine(prompt: string): Promise<string> {
-    this.inicioProceso.next(); // Notificar inicio del proceso
+    this.inicioProceso.next();
     this.mostrarAnimacion = true;
-    let completPromt: string = SECRET_PROMPT.FILO_GUTIERREZ2 + prompt;
-
+    //El SECRET PROMPT SOLO DEBE ENVIARSE LA PRIMERA VEZ
+    let completPromt: string = this.conversationMemory + SECRET_PROMPT.FILO_GUTIERREZ2 + prompt;
+    console.log(completPromt, "TODO EL PROMPT");
     const response = await this.openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
@@ -69,14 +71,11 @@ export class ChatService {
         }
       ]
     })
-    console.log(completPromt, "lo que digo yo");
-    let memoryConversation: string = '';
-      let resIA: string = response.data.choices[0].message?.content!
-
-    console.log(response.data, "respuesta");
+    let resIA: string = response.data.choices[0].message?.content!
+    this.memoryChat(prompt, resIA)
     this.mostrarAnimacion = true;
-    this.finProceso.next(); // Notificar fin del proceso
-    return response.data.choices[0].message?.content!;
+    this.finProceso.next();
+    return resIA;
   }
 
   async davinciEngine(prompt: string): Promise<string> {
@@ -106,6 +105,13 @@ export class ChatService {
       return 'Error';
     }
 
+  }
+
+  memoryChat(memoryRemember: string, memoryResponseUser:string){
+    // Agregar la pregunta del usuario a la memoria de la conversación.
+    this.conversationMemory += `[Usuario] ${memoryRemember}\n`;
+    // Agregar la respuesta del modelo a la memoria de la conversación.
+    this.conversationMemory += `[gpt-3.5-turbo] ${memoryResponseUser}\n`;
   }
 
 

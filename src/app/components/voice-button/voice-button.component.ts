@@ -19,6 +19,7 @@ export class VoiceButtonComponent {
   resIa?:string;
   record: boolean = false;
   recorder: any;
+
   constructor(
     private chatService: ChatService,
     private emotionService: EmotionDetectorService
@@ -70,6 +71,9 @@ export class VoiceButtonComponent {
     const message = this.myForm.get('message')?.value;
     if (message) {
        this.chatService.sendMessage(message).then((res: any )=> {
+
+        console.log("Así llega la respuesta de la IA:", this.resIa);
+
          this.resIa = res;
          if (this.resIa) {
            this.getFeeling(this.resIa);

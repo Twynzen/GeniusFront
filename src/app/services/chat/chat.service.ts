@@ -7,6 +7,7 @@ import { SECRET_PROMPT } from '../../constants/secret-prompt';
 import { engines } from '../../constants/engines';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +25,7 @@ export class ChatService {
   responseIa: string = '';
   conversationMemory:string='';
   mostrarAnimacion:boolean = false;
+  countMemory: number = 0;
 
   constructor() { }
 
@@ -59,8 +61,7 @@ export class ChatService {
   async gptTurboEngine(prompt: string): Promise<string> {
     this.inicioProceso.next();
     this.mostrarAnimacion = true;
-    //El SECRET PROMPT SOLO DEBE ENVIARSE LA PRIMERA VEZ
-    let completPromt: string = this.conversationMemory + SECRET_PROMPT.FILO_GUTIERREZ2 + prompt;
+    let completPromt: string = SECRET_PROMPT.FILO_GUTIERREZ2 + prompt + this.conversationMemory ;
     console.log(completPromt, "TODO EL PROMPT");
     const response = await this.openai.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -108,10 +109,12 @@ export class ChatService {
   }
 
   memoryChat(memoryRemember: string, memoryResponseUser:string){
-    // Agregar la pregunta del usuario a la memoria de la conversación.
+    this.countMemory =+ 1;
+    this.conversationMemory += 'Lo siguiente es una memoria de la conversación anterior: "'
     this.conversationMemory += `[Usuario] ${memoryRemember}\n`;
-    // Agregar la respuesta del modelo a la memoria de la conversación.
     this.conversationMemory += `[gpt-3.5-turbo] ${memoryResponseUser}\n`;
+    this.conversationMemory += '"'
+
   }
 
 

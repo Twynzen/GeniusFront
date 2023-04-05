@@ -113,3 +113,4 @@ Estilo de comunicación: Utiliza un tono intimidante y amenazador para conseguir
 8. LEER https://github.com/Twynzen/openai-cookbook
 9. palabra de bloqueo por si se debe terminar la conversación.
 >Se envía una palabra secreta que permite detener la conversación si esta teniendo un flujo no deseado, detectar si en el string viene esa palabra para finalziar el chat y no permitir seguir con la conversación.
+10. Mejorar forma en que se visualiza la data enviada, actualizada y memorias

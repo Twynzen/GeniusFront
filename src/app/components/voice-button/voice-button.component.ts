@@ -89,4 +89,8 @@ export class VoiceButtonComponent {
       this.feeling = res;
     });
   }
+
+  finishConclution(){
+
+  }
 }

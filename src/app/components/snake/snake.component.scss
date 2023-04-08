@@ -1,0 +1,88 @@
+canvas {
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #0f0;
+}
+
+// snake animation
+/* Estilos del contenedor */
+.snake-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #2b2b2b;
+}
+
+/* Estilos de la serpiente */
+.snake {
+  position: relative;
+  width: 200px;
+  height: 100px;
+}
+
+/* Estilos de la cabeza */
+.head {
+  position: absolute;
+  top: 20px;
+  left: 160px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #4CAF50;
+}
+
+/* Estilos del cuerpo */
+.body {
+  position: absolute;
+  top: 20px;
+  left: 120px;
+  width: 100px;
+  height: 20px;
+  background-color: #4CAF50;
+}
+
+/* Estilos de la cola */
+.tail {
+  position: absolute;
+  top: 20px;
+  left: 100px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #4CAF50;
+}
+
+/* Estilos de la manzana */
+.apple {
+  position: absolute;
+  top: 40px;
+  left: 50px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #f44336;
+  animation: apple 3s infinite ease-in-out;
+}
+
+/* Animación de la manzana */
+@keyframes apple {
+  0% {
+    top: 40px;
+    left: 50px;
+  }
+
+  50% {
+    top: 60px;
+    left: 110px;
+  }
+
+  100% {
+    top: 20px;
+    left: 150px;
+  }
+}

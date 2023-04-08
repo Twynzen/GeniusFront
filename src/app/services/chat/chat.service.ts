@@ -61,7 +61,7 @@ export class ChatService {
   async gptTurboEngine(prompt: string): Promise<string> {
     this.inicioProceso.next();
     this.mostrarAnimacion = true;
-    let completPromt: string = SECRET_PROMPT.FILO_GUTIERREZ2 + prompt + this.conversationMemory ;
+    let completPromt: string = SECRET_PROMPT.CULEBRA + prompt + this.conversationMemory ;
     console.log(completPromt, "TODO EL PROMPT");
     const response = await this.openai.createChatCompletion({
       model: "gpt-3.5-turbo",

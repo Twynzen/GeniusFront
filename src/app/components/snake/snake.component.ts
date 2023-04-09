@@ -17,14 +17,17 @@ export class SnakeComponent {
   private score = 0; // Puntuación del jugador
   private direction = 'right'; // Dirección actual de la serpiente
   private gameLoop: any; // Intervalo del juego
-  private paused = false;
+  paused: boolean = false;
+  public messageToShow: string = '';
+  showAnimation: boolean = false;
   count: number = 0;
+  culebraGifUrl = './assets/img/culebrita.gif';
 
 
   constructor(
     private chatService: ChatService,
 
-  ){
+  ) {
 
   }
 
@@ -80,7 +83,8 @@ export class SnakeComponent {
     if (this.apple && this.apple.x === head.x && this.apple.y === head.y) {
       this.score++;
       this.spawnApple();
-      this.paused = true; // Pausar el juego
+      this.paused = true;
+      this.showAnimation = true; // Pausar el juego
       this.showMessage(); // Mostrar el mensaje del servicio de chat
     } else {
       this.snake.pop();
@@ -120,20 +124,29 @@ export class SnakeComponent {
       case 'ArrowDown': if (this.direction !== 'up') this.direction = 'down'; break;
       case 'ArrowLeft': if (this.direction !== 'right') this.direction = 'left'; break;
       case 'ArrowRight': if (this.direction !== 'left') this.direction = 'right'; break;
-      case 'Enter': this.paused = !this.paused; break;
+      case 'Enter':
+        this.paused = !this.paused;
+        if (this.showAnimation) {
+          this.stopThinking();
+        }
+        break;
     }
     console.log(event.key);
   }
   async showMessage() {
     this.count = this.score;
-    const apples: string = `Las manzanas que he comido son ${this.count.toString()} y pienso `;
+    const apples: string = `Las manzanas que ha comido son ${this.count.toString()}. La serpiente piensa: `;
     const message = await this.chatService.gptTurboEngine(apples);
-    console.log(message,"manzanas?");
+    console.log(message, "manzanas?");
+    this.messageToShow = message; // Asignar el valor de message a la propiedad
 
-
-    alert(message); // Mostrar el mensaje en un prompt
-    this.paused = false;
 
   }
+  stopThinking() {
+    this.paused = false;
+    this.showAnimation = false;
+    this.messageToShow = '';
+  }
+
 
 }

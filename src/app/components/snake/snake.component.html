@@ -1,9 +1,23 @@
-<canvas #myCanvas (keydown)="onKeyDown($event)" width="600" height="600" tabindex="1"></canvas>
-<div class="snake-container">
-  <div class="snake">
-    <div class="head"></div>
-    <div class="body"></div>
-    <div class="tail"></div>
-    <div class="apple"></div>
+<div class="game-pause" *ngIf="paused">
+  <h1 class="game-pause__title">PAUSE</h1>
+</div>
+
+<canvas #myCanvas (keydown)="onKeyDown($event)" width="600" height="600"
+  tabindex="1"></canvas>
+<div class="overlay" *ngIf="showAnimation">
+  <img [src]="culebraGifUrl" alt="Mi GIF">
+  <div class="cloud">
+    <div class="thought-bubble">
+      <div class="message">
+        <p>{{ messageToShow | filterResponse}}</p>
+
+      </div>
+      <button class="jungle-button" (keydown)="onKeyDown($event)"
+        (click)="stopThinking()">
+        Dejar de pensar
+      </button>
+
+
+    </div>
   </div>
 </div>

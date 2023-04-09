@@ -8,6 +8,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { WalkinLoaderComponent } from './components/animations/walkin-loader/walkin-loader.component';
 import { ThinkingFigureComponent } from './components/animations/thinking-figure/thinking-figure.component';
 import { SnakeComponent } from './components/snake/snake.component';
+import { FilterResponsePipe } from './pipes/filter-response/filter-response.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SnakeComponent } from './components/snake/snake.component';
     VoiceButtonComponent,
     WalkinLoaderComponent,
     ThinkingFigureComponent,
-    SnakeComponent
+    SnakeComponent,
+    FilterResponsePipe,
   ],
   imports: [
     BrowserModule,

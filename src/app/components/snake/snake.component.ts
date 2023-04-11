@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { FilterResponsePipe } from 'src/app/pipes/filter-response/filter-response.pipe';
 import { ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({
@@ -26,6 +27,7 @@ export class SnakeComponent {
 
   constructor(
     private chatService: ChatService,
+    private filterResponsePipe: FilterResponsePipe
 
   ) {
 
@@ -139,14 +141,24 @@ export class SnakeComponent {
     const message = await this.chatService.gptTurboEngine(apples);
     console.log(message, "manzanas?");
     this.messageToShow = message; // Asignar el valor de message a la propiedad
-
+    this.convertTextToSpeech(this.messageToShow);
 
   }
+
   stopThinking() {
     this.paused = false;
     this.showAnimation = false;
     this.messageToShow = '';
   }
+
+  convertTextToSpeech(text: string) {
+    const synth = window.speechSynthesis;
+    const filteredText = this.filterResponsePipe.transform(text); // Aplica el pipe al texto
+    const utterance = new SpeechSynthesisUtterance(filteredText);
+    utterance.lang = 'es-ES'; // Cambia esto al idioma que prefieras
+    synth.speak(utterance);
+  }
+
 
 
 }

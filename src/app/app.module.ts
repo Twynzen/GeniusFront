@@ -9,6 +9,7 @@ import { WalkinLoaderComponent } from './components/animations/walkin-loader/wal
 import { ThinkingFigureComponent } from './components/animations/thinking-figure/thinking-figure.component';
 import { SnakeComponent } from './components/snake/snake.component';
 import { FilterResponsePipe } from './pipes/filter-response/filter-response.pipe';
+import { VoicesComponent } from './components/voices/voices.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FilterResponsePipe } from './pipes/filter-response/filter-response.pipe
     ThinkingFigureComponent,
     SnakeComponent,
     FilterResponsePipe,
+    VoicesComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,7 @@ import { FilterResponsePipe } from './pipes/filter-response/filter-response.pipe
     ReactiveFormsModule,
 
   ],
-  providers: [],
+  providers: [FilterResponsePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,5 @@
+<div *ngFor="let voice of voices">
+  <button (click)="speak(synth, 'Hola, soy ' + voice.name, voice)">
+    {{ voice.name }} ({{ voice.lang }})
+  </button>
+</div>

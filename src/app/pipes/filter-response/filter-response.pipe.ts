@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filterResponse'
+  name: 'filterResponse',
 })
 export class FilterResponsePipe implements PipeTransform {
-
   transform(value: string, ...args: unknown[]): string {
     // Encuentra la parte relevante de la respuesta usando una expresión regular
-    const responseRegex = /(?:La serpiente piensa:)(?:(?!La serpiente piensa:).)*$/;
+    const responseRegex =
+      /(?:La serpiente piensa:)(?:(?!La serpiente piensa:)[\s\S])*$/;
 
     // Encuentra la coincidencia
     const match = value.match(responseRegex);
@@ -16,7 +16,7 @@ export class FilterResponsePipe implements PipeTransform {
 
     if (match && match[0]) {
       // Retorna la parte relevante de la respuesta
-      filteredValue = match[0].replace("La serpiente piensa:", "").trim();
+      filteredValue = match[0].replace('La serpiente piensa:', '').trim();
     } else {
       // Si no se encuentra ninguna coincidencia, retorna el valor original
       filteredValue = value;
@@ -34,5 +34,4 @@ export class FilterResponsePipe implements PipeTransform {
 
     return filteredValue.trim();
   }
-
 }

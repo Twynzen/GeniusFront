@@ -30,7 +30,6 @@ export class SnakeComponent {
     private filterResponsePipe: FilterResponsePipe
 
   ) {
-
   }
 
 
@@ -133,13 +132,13 @@ export class SnakeComponent {
         }
         break;
     }
-    console.log(event.key);
   }
   async showMessage() {
     this.count = this.score;
     const apples: string = `Las manzanas que ha comido son ${this.count.toString()}. La serpiente piensa: `;
-    const message = await this.chatService.gptTurboEngine(apples);
-    console.log(message, "manzanas?");
+    const message = this.filterResponsePipe.transform(
+      await this.chatService.gptTurboEngine(apples)
+    );
     this.messageToShow = message; // Asignar el valor de message a la propiedad
     this.convertTextToSpeech(this.messageToShow);
 

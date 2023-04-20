@@ -33,11 +33,11 @@ export class VoiceButtonComponent {
   });
 
   ngOnInit() {
-    this.chatService.inicioProceso$.subscribe(() => {
+    this.chatService.startProcess$.subscribe(() => {
       this.showAnimation = true;
     });
 
-    this.chatService.finProceso$.subscribe(() => {
+    this.chatService.endProcess$.subscribe(() => {
       this.showAnimation = false;
     });
   }

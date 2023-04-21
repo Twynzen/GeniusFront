@@ -1,4 +1,4 @@
 
 export const environment = {
-  GPT_API_KEY: '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',
+  GPT_API_KEY: 'sk-Ky2hsD9rnLG6zbZGsriBT3BlbkFJVZEtfAyWTYj1kCUTb5z',
 };

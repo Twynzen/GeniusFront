@@ -36,25 +36,22 @@ export class ChatService {
     return this.endProcess.asObservable();
   }
 
-  sendMessage(prompt: string): any {
+  sendMessage(prompt: string, context: string): any {
     let gptTurbo: boolean = true;
     let gptDavinci: boolean = false;
 
     if (gptTurbo) {
-      let resIa: any = this.gptTurboEngine(prompt);
-
+      let resIa: any = this.gptTurboEngine(prompt, context);
       return resIa;
     } else if (gptDavinci) {
       let resIa: any = this.davinciEngine(prompt);
-
       return resIa;
     } else {
       return '';
     }
   }
 
-  async gptTurboEngine(prompt: string): Promise<string> {
-    const context: string = SECRET_PROMPT.CULEBRA;
+  async gptTurboEngine(prompt: string, context: string): Promise<string> {
     this.startProcess.next();
     this.showAnimation = true;
 

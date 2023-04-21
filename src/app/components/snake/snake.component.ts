@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { SECRET_PROMPT } from 'src/app/constants/secret-prompt';
 import { FilterResponsePipe } from 'src/app/pipes/filter-response/filter-response.pipe';
 import { ChatService } from 'src/app/services/chat/chat.service';
 
@@ -170,21 +171,22 @@ export class SnakeComponent {
     this.count = this.score;
     const apples: string = `Las manzanas que ha comido son ${this.count.toString()}. La serpiente piensa: `;
     const dead: string = `La culebra se estrelló y se dio un golpe en la cabeza, la serpiente muere lentamente, manzanas totales:
-    ${
-      this.count === 0
-        ? 'no logró comer ninguna manzana'
-        : this.count.toString() + ' manzanas'
-    }.
-    Agonizante y muriendo: La serpiente piensa: `;
+  ${
+    this.count === 0
+      ? 'no logró comer ninguna manzana'
+      : this.count.toString() + ' manzanas'
+  }.
+  Agonizante y muriendo: La serpiente piensa: `;
+    const culebraContext = SECRET_PROMPT.CULEBRA;
     if (action === 'apple') {
       const message = this.filterResponsePipe.transform(
-        await this.chatService.gptTurboEngine(apples)
+        await this.chatService.gptTurboEngine(apples, culebraContext)
       );
       this.messageToShow = message; // Asignar el valor de message a la propiedad
       this.convertTextToSpeech(this.messageToShow);
     } else {
       const message = this.filterResponsePipe.transform(
-        await this.chatService.gptTurboEngine(dead)
+        await this.chatService.gptTurboEngine(dead, culebraContext)
       );
       this.messageToShow = message; // Asignar el valor de message a la propiedad
       this.convertTextToSpeech(this.messageToShow);

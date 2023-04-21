@@ -2,34 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmotionDetectorService } from 'src/app/services/emotionDetector/emotion-detector.service';
 import { ChatService } from '../../services/chat/chat.service';
+import { SECRET_PROMPT } from 'src/app/constants/secret-prompt';
 
 
 @Component({
   selector: 'app-voice-button',
   templateUrl: './voice-button.component.html',
-  styleUrls: ['./voice-button.component.scss']
+  styleUrls: ['./voice-button.component.scss'],
 })
 export class VoiceButtonComponent {
-
   showAnimation = false;
   messageControl = new FormControl();
   message = 'Hola saluda a cascabot';
   feeling: string = '';
   audioFile: File | null = null;
-  resIa?:string;
+  resIa?: string;
   record: boolean = false;
   recorder: any;
 
   constructor(
     private chatService: ChatService,
     private emotionService: EmotionDetectorService
-
-  ){
-
-  }
+  ) {}
   myForm = new FormGroup({
     message: new FormControl('', Validators.required),
-    record: new FormControl(false)
+    record: new FormControl(false),
   });
 
   ngOnInit() {
@@ -42,43 +39,43 @@ export class VoiceButtonComponent {
     });
   }
 
-  recording(){
+  recording() {
     this.record = !this.record;
 
     if (!this.recorder) {
-      navigator.mediaDevices.getUserMedia({ audio: true })
-        .then((stream) => {
-          this.recorder = new MediaRecorder(stream);
-          this.recorder.start();
-          this.recorder.ondataavailable = (event: { data: any; }) => {
-            const blob = event.data;
-            const file = new File([blob], 'recording.mp3', { type: 'audio/mp3' });
+      navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+        this.recorder = new MediaRecorder(stream);
+        this.recorder.start();
+        this.recorder.ondataavailable = (event: { data: any }) => {
+          const blob = event.data;
+          const file = new File([blob], 'recording.mp3', { type: 'audio/mp3' });
 
-            this.audioFile = file;
-          }
-        });
+          this.audioFile = file;
+        };
+      });
     } else {
       this.recorder.stop();
       this.recorder = null;
 
       // Detener la fuente de audio para que no siga grabando
       const tracks = this.recorder.stream.getTracks();
-      tracks.forEach((track: { stop: () => any; }) => track.stop());
+      tracks.forEach((track: { stop: () => any }) => track.stop());
     }
   }
 
   sendMessage() {
     const message = this.myForm.get('message')?.value;
     if (message) {
-       this.chatService.sendMessage(message).then((res: any )=> {
-
-        console.log("Así llega la respuesta de la IA:", this.resIa);
-
-         this.resIa = res;
-         if (this.resIa) {
-           this.getFeeling(this.resIa);
-         }
-      });
+      const filoGutierrezContext = SECRET_PROMPT.FILO_GUTIERREZ;
+      this.chatService
+        .sendMessage(message, filoGutierrezContext)
+        .then((res: any) => {
+          console.log('Así llega la respuesta de la IA:', this.resIa);
+          this.resIa = res;
+          if (this.resIa) {
+            this.getFeeling(this.resIa);
+          }
+        });
 
       this.myForm.patchValue({ message: '' });
     }
@@ -90,7 +87,5 @@ export class VoiceButtonComponent {
     });
   }
 
-  finishConclution(){
-
-  }
+  finishConclution() {}
 }

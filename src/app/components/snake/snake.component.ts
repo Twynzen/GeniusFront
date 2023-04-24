@@ -24,6 +24,7 @@ export class SnakeComponent {
   showAnimation: boolean = false;
   count: number = 0;
   culebraGifUrl = './assets/img/culebrita.gif';
+  public gameState: 'start' | 'running' | 'dead' = 'start';
 
   constructor(
     private chatService: ChatService,
@@ -37,16 +38,18 @@ export class SnakeComponent {
     this.context = canvas.getContext('2d');
 
     // Inicializar la serpiente y la manzana
-    this.initSnake();
-    this.spawnApple();
+    // this.initSnake();
+    // this.spawnApple();
+    this.drawWelcomeMessage();
 
     // Iniciar el bucle de juego
     this.gameLoop = setInterval(() => {
-      this.update();
-      this.draw();
+      if (this.gameState === 'running') {
+        this.update();
+        this.draw();
+      }
     }, 100);
   }
-
   initSnake() {
     // Inicializar la serpiente con 3 bloques en el centro del canvas
     const x = Math.floor(this.width / 2 / this.blockSize) * this.blockSize;
@@ -69,6 +72,30 @@ export class SnakeComponent {
         (Math.random() * (this.height - this.blockSize)) / this.blockSize
       ) * this.blockSize;
     this.apple = { x: x, y: y };
+  }
+
+  drawWelcomeMessage() {
+    const title = 'Culebra Consciente';
+    const description = [
+      'Por favor, cuídala. Si se golpea la cabeza, morirá.',
+      '¡Presiona Enter para comenzar!',
+    ];
+
+    this.context.fillStyle = '#222';
+    this.context.fillRect(0, 0, this.width, this.height);
+
+    // Dibujar el título
+    this.context.font = '30px Arial';
+    this.context.textAlign = 'center';
+    this.context.textBaseline = 'middle';
+    this.context.fillStyle = '#fff';
+    this.context.fillText(title, this.width / 2, this.height / 2 - 50);
+
+    // Dibujar la descripción
+    this.context.font = '20px Arial';
+    description.forEach((line, index) => {
+      this.context.fillText(line, this.width / 2, this.height / 2 + index * 30);
+    });
   }
 
   update() {
@@ -113,9 +140,11 @@ export class SnakeComponent {
       )
     ) {
       clearInterval(this.gameLoop);
+      this.gameLoop = null;
       this.showMessage('dead');
       this.paused = true;
       this.showAnimation = true;
+      this.gameState = 'dead';
     }
   }
 
@@ -143,6 +172,22 @@ export class SnakeComponent {
     this.context.font = '20px Arial';
     this.context.fillText('Score: ' + this.score, 10, 30);
   }
+  initGame() {
+    this.initSnake();
+    this.spawnApple();
+    this.score = 0;
+    this.direction = 'right';
+    this.paused = false;
+    this.gameState = 'running';
+
+    // Reiniciar el bucle de juego si está detenido
+    if (!this.gameLoop) {
+      this.gameLoop = setInterval(() => {
+        this.update();
+        this.draw();
+      }, 100);
+    }
+  }
 
   onKeyDown(event: KeyboardEvent) {
     // Cambiar la dirección de la serpiente según la tecla pulsada
@@ -160,9 +205,13 @@ export class SnakeComponent {
         if (this.direction !== 'left') this.direction = 'right';
         break;
       case 'Enter':
-        this.paused = !this.paused;
-        if (this.showAnimation) {
-          this.stopThinking();
+        if (this.gameState === 'start' || this.gameState === 'dead') {
+          this.initGame();
+        } else {
+          this.paused = !this.paused;
+          if (this.showAnimation) {
+            this.stopThinking();
+          }
         }
         break;
     }

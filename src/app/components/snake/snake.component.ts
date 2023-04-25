@@ -74,6 +74,13 @@ export class SnakeComponent {
     this.apple = { x: x, y: y };
   }
 
+  private updateScoreDisplay() {
+    const scoreElement = document.getElementById('score');
+    if (scoreElement) {
+      scoreElement.textContent = 'Score: ' + this.score;
+    }
+  }
+
   drawWelcomeMessage() {
     const title = 'Culebra Consciente';
     const description = [
@@ -121,6 +128,7 @@ export class SnakeComponent {
     // Comprobar si la serpiente ha comido una manzana
     if (this.apple && this.apple.x === head.x && this.apple.y === head.y) {
       this.score++;
+      this.updateScoreDisplay();
       this.spawnApple();
       this.paused = true;
       this.showAnimation = true; // Pausar el juego
@@ -170,7 +178,7 @@ export class SnakeComponent {
     // Dibujar la puntuación
     this.context.fillStyle = '#fff';
     this.context.font = '20px Arial';
-    this.context.fillText('Score: ' + this.score, 10, 30);
+    // this.context.fillText('Score: ' + this.score, 10, 30);
   }
   initGame() {
     this.initSnake();

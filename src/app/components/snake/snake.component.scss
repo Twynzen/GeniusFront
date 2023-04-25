@@ -151,6 +151,14 @@ canvas {
   margin: 0;
 }
 
+.score-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #fff;
+}
+
 @keyframes cloud-appear {
   0% {
     opacity: 0;

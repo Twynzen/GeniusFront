@@ -10,6 +10,7 @@ import { ThinkingFigureComponent } from './components/animations/thinking-figure
 import { SnakeComponent } from './components/snake/snake.component';
 import { FilterResponsePipe } from './pipes/filter-response/filter-response.pipe';
 import { VoicesComponent } from './components/voices/voices.component';
+import { MultipleSpeakComponent } from './components/multiple-speak/multiple-speak.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { VoicesComponent } from './components/voices/voices.component';
     SnakeComponent,
     FilterResponsePipe,
     VoicesComponent,
+    MultipleSpeakComponent,
   ],
   imports: [
     BrowserModule,

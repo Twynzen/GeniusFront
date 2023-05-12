@@ -11,6 +11,7 @@ import { SnakeComponent } from './components/snake/snake.component';
 import { FilterResponsePipe } from './pipes/filter-response/filter-response.pipe';
 import { VoicesComponent } from './components/voices/voices.component';
 import { MultipleSpeakComponent } from './components/multiple-speak/multiple-speak.component';
+import { AlarmComponent } from './components/alarm/alarm.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MultipleSpeakComponent } from './components/multiple-speak/multiple-spe
     FilterResponsePipe,
     VoicesComponent,
     MultipleSpeakComponent,
+    AlarmComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,20 @@
+<div class="flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white">
+  <h1 class="text-6xl mb-10">{{ clock }}</h1>
+
+  <form [formGroup]="alarmForm" (ngSubmit)="setAlarm()" class="w-64 mb-10">
+    <div class="flex items-center mb-5">
+      <label for="alarm" class="w-24 text-right mr-5">Establecer alarma:</label>
+      <input id="alarm" type="time" formControlName="alarm" class="w-full h-10 px-2 bg-gray-700 text-white rounded">
+    </div>
+    <div class="flex justify-center">
+      <button type="submit" class="w-full py-2 px-4 bg-green-600 hover:bg-green-500 rounded text-white">Establecer alarma</button>
+    </div>
+  </form>
+
+  <div class="w-64">
+    <h2 class="text-2xl mb-5">Alarmas establecidas:</h2>
+    <ul>
+      <li *ngFor="let alarm of alarms" class="mb-2 bg-gray-700 p-2 rounded">{{ alarm }}</li>
+    </ul>
+  </div>
+</div>

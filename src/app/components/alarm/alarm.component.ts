@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { interval, Subscription } from 'rxjs';
+import { SECRET_PROMPT } from 'src/app/constants/secret-prompt';
+import { ChatService } from 'src/app/services/chat/chat.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,7 +20,7 @@ export class AlarmComponent implements OnInit {
   alarms: string[] = [];
   private alarmSound: any;
 
-  constructor() {
+  constructor(private chatService: ChatService) {
     this.alarmSound = new Audio();
     this.alarmSound.src = 'assets/sounds/alarm.mp3'; // Asegúrate de que esta ruta apunta a tu archivo de audio
     this.alarmSound.load();
@@ -47,6 +49,9 @@ export class AlarmComponent implements OnInit {
 
   playAlarmSound() {
     this.alarmSound.play();
+  }
+  stopAlarmSound() {
+    this.alarmSound.pause();
   }
 
   setAlarm() {
@@ -79,7 +84,6 @@ export class AlarmComponent implements OnInit {
 
   showAlarmPopup(time: string) {
     this.playAlarmSound();
-
     Swal.fire({
       title: '¡Alarma!',
       html: `<span class="text-white">La alarma establecida para las ${time} está sonando.</span>`,
@@ -90,6 +94,23 @@ export class AlarmComponent implements OnInit {
         title: 'text-yellow-500',
         confirmButton: 'bg-green-500 hover:bg-green-600',
       },
+    }).then(() => {
+      this.stopAlarmSound();
+      const context = SECRET_PROMPT.DANIELMENTOR;
+      const prompt = 'SUENA LA ALARMA! ';
+      this.chatService.sendMessage(prompt, context).then((response: any) => {
+        Swal.fire({
+          title: 'Respuesta de la IA',
+          html: `<span class="text-black">${response}</span>`,
+          icon: 'info',
+          confirmButtonText: 'Ok',
+          customClass: {
+            container: 'bg-gray-800 text-white',
+            title: 'text-yellow-500',
+            confirmButton: 'bg-green-500 hover:bg-green-600',
+          },
+        });
+      });
     });
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { interval, Subscription } from 'rxjs';
 import { SECRET_PROMPT } from 'src/app/constants/secret-prompt';
+import { AlarmInfo } from 'src/app/models/alarmInfo.interface';
 import { ChatService } from 'src/app/services/chat/chat.service';
 import Swal from 'sweetalert2';
 
@@ -15,9 +16,10 @@ export class AlarmComponent implements OnInit {
   clockSubscription: Subscription = {} as Subscription;
   alarmForm: FormGroup = new FormGroup({
     alarm: new FormControl(''),
+    description: new FormControl(''),
   });
   alarmTime: string | null = '';
-  alarms: string[] = [];
+  alarms: AlarmInfo[] = [];
   private alarmSound: any;
 
   constructor(private chatService: ChatService) {
@@ -56,6 +58,7 @@ export class AlarmComponent implements OnInit {
 
   setAlarm() {
     let alarmTime = this.alarmForm.get('alarm')?.value;
+    let description = this.alarmForm.get('description')?.value;
 
     if (alarmTime) {
       // Convertir la hora de la alarma a formato de 12 horas
@@ -66,7 +69,8 @@ export class AlarmComponent implements OnInit {
       hours = hours ? hours : 12;
       alarmTime = `${hours.toString().padStart(2, '0')}:${minutes} ${midday}`;
 
-      this.alarms.push(alarmTime);
+      // this.alarms.push(alarmTime);
+      this.alarms.push({ time: alarmTime, description: description });
     }
 
     this.alarmForm.reset();
@@ -74,20 +78,19 @@ export class AlarmComponent implements OnInit {
 
   checkAlarm() {
     this.alarms = this.alarms.filter((alarm) => {
-      if (alarm === this.clock) {
-        this.showAlarmPopup(alarm);
+      if (alarm.time === this.clock) {
+        this.showAlarmPopup(alarm); // Modificado
         return false;
       }
       return true;
     });
   }
 
-  showAlarmPopup(time: string) {
+  showAlarmPopup(alarm: AlarmInfo) {
     this.playAlarmSound();
     Swal.fire({
       title: '¡Alarma!',
-      html: `<span class="text-white">La alarma establecida para las ${time} está sonando.</span>`,
-      icon: 'info',
+      html: `<span class="text-white">La alarma establecida para las ${alarm.time} está sonando. ${alarm.description}</span>`,
       confirmButtonText: 'Ok',
       customClass: {
         container: 'bg-gray-800 text-white',
@@ -97,7 +100,7 @@ export class AlarmComponent implements OnInit {
     }).then(() => {
       this.stopAlarmSound();
       const context = SECRET_PROMPT.DANIELMENTOR;
-      const prompt = 'SUENA LA ALARMA! ';
+      const prompt = `SUENA LA ALARMA! "Descripción: (${alarm.description})"`;
       this.chatService.sendMessage(prompt, context).then((response: any) => {
         Swal.fire({
           title: 'Respuesta de la IA',

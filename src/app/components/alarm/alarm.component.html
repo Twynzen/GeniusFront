@@ -6,6 +6,10 @@
       <label for="alarm" class="w-24 text-right mr-5">Establecer alarma:</label>
       <input id="alarm" type="time" formControlName="alarm" class="w-full h-10 px-2 bg-gray-700 text-white rounded">
     </div>
+      <div class="flex items-center mb-5">
+    <label for="description" class="w-24 text-right mr-5">Descripción:</label>
+    <input id="description" type="text" formControlName="description" class="w-full h-10 px-2 bg-gray-700 text-white rounded">
+  </div>
     <div class="flex justify-center">
       <button type="submit" class="w-full py-2 px-4 bg-green-600 hover:bg-green-500 rounded text-white">Establecer alarma</button>
     </div>
@@ -14,7 +18,7 @@
   <div class="w-64">
     <h2 class="text-2xl mb-5">Alarmas establecidas:</h2>
     <ul>
-      <li *ngFor="let alarm of alarms" class="mb-2 bg-gray-700 p-2 rounded">{{ alarm }}</li>
+       <li *ngFor="let alarm of alarms" class="mb-2 bg-gray-700 p-2 rounded">{{ alarm.time }} - {{ alarm.description }}</li>
     </ul>
   </div>
 </div>

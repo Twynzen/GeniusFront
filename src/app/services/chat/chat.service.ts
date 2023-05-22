@@ -69,6 +69,7 @@ export class ChatService {
       });
 
       const aiResponse: string = response.data.choices[0].message?.content!;
+      //eliminar promtp para la memoria
       this.updateConversationMemory(prompt, aiResponse);
       this.showAnimation = false;
       this.endProcess.next();
@@ -78,7 +79,7 @@ export class ChatService {
       console.log('CURRENT PROMPT:', prompt);
       console.log(
         'CURRENT MEMORY:',
-        this.memoryCount++,
+        this.memoryCount,
         this.conversationMemory
       );
       console.log('AI RESPONSE:', aiResponse);
@@ -122,11 +123,15 @@ export class ChatService {
   }
 
   updateConversationMemory(memoryRemember: string, memoryResponseUser: string) {
-    this.memoryCount = +1;
+    this.memoryCount += 1;
+    this.conversationMemory = '';
+    // en vez de sumar memoria, solicitar que se analice el pensamiento anterior para evolucionar
+    // debe evolucionar por cada memoria, no solo recordarla, usarla para definirse
     this.conversationMemory +=
-      'Lo siguiente es una memoria de las conversaciones anterior: "';
-    this.conversationMemory += `[Usuario] ${memoryRemember}\n`;
-    this.conversationMemory += `[gpt-3.5-turbo] ${memoryResponseUser}\n`;
+      'Como serpiente/culebra, Analiza y aprende de tu anterior conversación, para que la siguiente respuesta sea más inteligente: "';
+      //cambiar nombre usuario a instrucción de realidad
+    this.conversationMemory += `[Información sobre persepción de realidad]: ${memoryRemember}\n`;
+    this.conversationMemory += `[gpt-3.5-turbo/serpiente/culebra]: ${memoryResponseUser}\n`;
     this.conversationMemory += '"';
   }
 }

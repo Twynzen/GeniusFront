@@ -68,7 +68,7 @@ export class VoiceButtonComponent {
     if (message) {
       const filoGutierrezContext = SECRET_PROMPT.FILO_GUTIERREZ;
       this.chatService
-        .sendMessage(message, filoGutierrezContext)
+        .sendMessage(message, filoGutierrezContext, 'gpt-3.5-turbo')
         .then((res: any) => {
           console.log('Así llega la respuesta de la IA:', this.resIa);
           this.resIa = res;

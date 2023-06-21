@@ -4,6 +4,7 @@ import { interval, Subscription } from 'rxjs';
 import { SECRET_PROMPT } from 'src/app/constants/secret-prompt';
 import { AlarmInfo } from 'src/app/models/alarmInfo.interface';
 import { ChatService } from 'src/app/services/chat/chat.service';
+import { TextToSpeechService } from 'src/app/services/textToSpeech/text-to-speech.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -22,7 +23,10 @@ export class AlarmComponent implements OnInit {
   alarms: AlarmInfo[] = [];
   private alarmSound: any;
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService,
+    private speechService: TextToSpeechService
+
+    ) {
     this.alarmSound = new Audio();
     this.alarmSound.src = 'assets/sounds/alarm.mp3'; // Asegúrate de que esta ruta apunta a tu archivo de audio
     this.alarmSound.load();
@@ -99,21 +103,25 @@ export class AlarmComponent implements OnInit {
       },
     }).then(() => {
       this.stopAlarmSound();
+
       const context = SECRET_PROMPT.DANIELMENTOR;
       const prompt = `SUENA LA ALARMA! "Descripción: (${alarm.description})"`;
-      this.chatService.sendMessage(prompt, context).then((response: any) => {
-        Swal.fire({
-          title: 'Respuesta de la IA',
-          html: `<span class="text-black">${response}</span>`,
-          icon: 'info',
-          confirmButtonText: 'Ok',
-          customClass: {
-            container: 'bg-gray-800 text-white',
-            title: 'text-yellow-500',
-            confirmButton: 'bg-green-500 hover:bg-green-600',
-          },
+      this.chatService
+        .sendMessage(prompt, context, 'gpt-3.5-turbo')
+        .then((response: any) => {
+          this.speechService.convertTextToSpeech(response);
+          Swal.fire({
+            title: 'Respuesta de la IA',
+            html: `<span class="text-black">${response}</span>`,
+            icon: 'info',
+            confirmButtonText: 'Ok',
+            customClass: {
+              container: 'bg-gray-800 text-white',
+              title: 'text-yellow-500',
+              confirmButton: 'bg-green-500 hover:bg-green-600',
+            },
+          });
         });
-      });
     });
   }
 

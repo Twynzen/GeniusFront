@@ -36,18 +36,15 @@ export class ChatService {
     return this.endProcess.asObservable();
   }
 
-  sendMessage(prompt: string, context: string): any {
-    let gptTurbo: boolean = true;
-    let gptDavinci: boolean = false;
-
-    if (gptTurbo) {
-      let resIa: any = this.gptTurboEngine(prompt, context);
-      return resIa;
-    } else if (gptDavinci) {
-      let resIa: any = this.davinciEngine(prompt);
-      return resIa;
-    } else {
-      return '';
+  sendMessage(prompt: string, context: string, model: string): any {
+    switch (model) {
+      case 'gpt-3.5-turbo':
+        return this.gptTurboEngine(prompt, context);
+      case 'davinci':
+        return this.davinciEngine(prompt);
+      default:
+        console.error('Modelo no soportado');
+        return '';
     }
   }
 
@@ -77,11 +74,7 @@ export class ChatService {
       console.group('Request information');
       console.log('CONTEXT:', context);
       console.log('CURRENT PROMPT:', prompt);
-      console.log(
-        'CURRENT MEMORY:',
-        this.memoryCount,
-        this.conversationMemory
-      );
+      console.log('CURRENT MEMORY:', this.memoryCount, this.conversationMemory);
       console.log('AI RESPONSE:', aiResponse);
       console.groupEnd();
 
@@ -97,7 +90,7 @@ export class ChatService {
   async davinciEngine(prompt: string): Promise<string> {
     const response = await this.openai.createCompletion({
       prompt: SECRET_PROMPT.FILO_GUTIERREZ + prompt,
-      model: engines.GPT_TURBO,
+      model: engines.TEXT_DAVINCI_003,
       max_tokens: 200,
       temperature: 0.9,
     });
@@ -124,14 +117,13 @@ export class ChatService {
 
   updateConversationMemory(memoryRemember: string, memoryResponseUser: string) {
     this.memoryCount += 1;
-    this.conversationMemory = '';
     // en vez de sumar memoria, solicitar que se analice el pensamiento anterior para evolucionar
     // debe evolucionar por cada memoria, no solo recordarla, usarla para definirse
     this.conversationMemory +=
-      'Como serpiente/culebra, Analiza y aprende de tu anterior conversación, para que la siguiente respuesta sea más inteligente: "';
-      //cambiar nombre usuario a instrucción de realidad
+      'Analiza y aprende de tus anteriores conversaciones, para que la siguiente respuesta sea más inteligente: "';
+    //cambiar nombre usuario a instrucción de realidad
     this.conversationMemory += `[Información sobre persepción de realidad]: ${memoryRemember}\n`;
-    this.conversationMemory += `[gpt-3.5-turbo/serpiente/culebra]: ${memoryResponseUser}\n`;
+    this.conversationMemory += `[gpt-3.5-turbo]: ${memoryResponseUser}\n`;
     this.conversationMemory += '"';
   }
 }

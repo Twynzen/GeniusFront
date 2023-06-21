@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { SECRET_PROMPT } from 'src/app/constants/secret-prompt';
 import { FilterResponsePipe } from 'src/app/pipes/filter-response/filter-response.pipe';
 import { ChatService } from 'src/app/services/chat/chat.service';
+import { TextToSpeechService } from 'src/app/services/textToSpeech/text-to-speech.service';
 
 @Component({
   selector: 'app-snake',
@@ -28,7 +29,8 @@ export class SnakeComponent {
 
   constructor(
     private chatService: ChatService,
-    private filterResponsePipe: FilterResponsePipe
+    private filterResponsePipe: FilterResponsePipe,
+    private speechService: TextToSpeechService
   ) {}
 
   ngAfterViewInit() {
@@ -240,13 +242,17 @@ export class SnakeComponent {
         await this.chatService.gptTurboEngine(apples, culebraContext)
       );
       this.messageToShow = message; // Asignar el valor de message a la propiedad
-      this.convertTextToSpeech(this.messageToShow);
+      this.speechService.convertTextToSpeech(
+        this.filterResponsePipe.transform(this.messageToShow)
+      );
     } else {
       const message = this.filterResponsePipe.transform(
         await this.chatService.gptTurboEngine(dead, culebraContext)
       );
       this.messageToShow = message; // Asignar el valor de message a la propiedad
-      this.convertTextToSpeech(this.messageToShow);
+      this.speechService.convertTextToSpeech(
+        this.filterResponsePipe.transform(this.messageToShow)
+      );
     }
   }
 
@@ -254,13 +260,5 @@ export class SnakeComponent {
     this.paused = false;
     this.showAnimation = false;
     this.messageToShow = '';
-  }
-
-  convertTextToSpeech(text: string) {
-    const synth = window.speechSynthesis;
-    const filteredText = this.filterResponsePipe.transform(text); // Aplica el pipe al texto
-    const utterance = new SpeechSynthesisUtterance(filteredText);
-    utterance.lang = 'es-ES'; // Cambia esto al idioma que prefieras
-    synth.speak(utterance);
   }
 }

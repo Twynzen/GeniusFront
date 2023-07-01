@@ -14,6 +14,7 @@ import { MultipleSpeakComponent } from './components/multiple-speak/multiple-spe
 import { AlarmComponent } from './components/alarm/alarm.component';
 import { TwoBestOneComponent } from './components/two-best-one/two-best-one.component';
 import { FormatResponsePipe } from './pipes/format-response.pipe';
+import { BrainComponent } from './components/animations/brain/brain/brain.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FormatResponsePipe } from './pipes/format-response.pipe';
     AlarmComponent,
     TwoBestOneComponent,
     FormatResponsePipe,
+    BrainComponent,
   ],
   imports: [
     BrowserModule,

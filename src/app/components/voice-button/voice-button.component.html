@@ -17,8 +17,9 @@
           <div class="mx-4 mb-2 max-w-lg">
             <div class="bg-white rounded-lg px-4 py-2 shadow" *ngIf="resIa">
               <p class="text-sm font-medium text-gray-900">IA</p>
-              <p class="text-sm text-gray-700">{{resIa}} La emoción de esete
-                mensaje es: {{feeling}}</p>
+              <p class="text-sm text-gray-700">{{resIa}}</p>
+
+              <p *ngIf="emotionDetector"> La emoción de este mensaje es: {{feeling}}</p>
             </div>
           </div>
 
@@ -61,7 +62,9 @@
                   <span class="w-4 h-4 bg-cover bg-no-repeat mr-2 inline-block"></span>
                   <span>Record</span>
                 </button>
-                <!-- <button (click)="playRecordedAudio()">SendAudio</button> -->
+                <button class="bg-blue-500 hover:bg-blue-600 text-white
+                  font-bold
+                  py-2 px-4 rounded" [ngClass]="{'pressed': emotionDetector}" (click)="emotionDetection()">Emotion Detector</button>
               </div>
             </div>
           </form>

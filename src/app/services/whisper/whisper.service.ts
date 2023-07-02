@@ -9,7 +9,6 @@ export class WhisperService {
   async transcribeAudio(audioFile: File): Promise<string> {
 
     // Crear un objeto FormData para enviar el archivo de audio
-    console.log(audioFile,"palaapi");
 
     const formData = new FormData();
     formData.append('file', audioFile);

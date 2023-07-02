@@ -6,7 +6,6 @@ import { SECRET_PROMPT } from 'src/app/constants/secret-prompt';
 import { WhisperService } from 'src/app/services/whisper/whisper.service';
 import { TextToSpeechService } from 'src/app/services/textToSpeech/text-to-speech.service';
 
-
 @Component({
   selector: 'app-voice-button',
   templateUrl: './voice-button.component.html',
@@ -14,6 +13,7 @@ import { TextToSpeechService } from 'src/app/services/textToSpeech/text-to-speec
 })
 export class VoiceButtonComponent {
   showAnimation = false;
+  emotionDetector = false;
   messageControl = new FormControl();
   message = 'Hola saluda a cascabot';
   feeling: string = '';
@@ -21,7 +21,7 @@ export class VoiceButtonComponent {
   resIa?: string;
   record: boolean = false;
   recorder: any;
-  fileYes:boolean = false;
+  fileYes: boolean = false;
 
   constructor(
     private chatService: ChatService,
@@ -77,6 +77,7 @@ export class VoiceButtonComponent {
   }
 
   processRecordedAudio() {
+    this.showAnimation = true;
     if (this.audioFile) {
       this.fileYes = true;
 
@@ -84,15 +85,17 @@ export class VoiceButtonComponent {
         .transcribeAudio(this.audioFile)
         .then((transcription) => {
           if (transcription) {
+            this.showAnimation = false;
             this.sendMessage(transcription);
             this.audioFile = null;
+          } else {
+            this.showAnimation = false;
           }
         });
     }
   }
 
   playRecordedAudio() {
-    console.log(this.audioFile, 'audiofileshow');
 
     if (this.audioFile) {
       // Crear una nueva URL de objeto para el archivo de audio
@@ -119,14 +122,12 @@ export class VoiceButtonComponent {
         this.chatService
           .sendMessage(messageToSend, context, 'gpt-3.5-turbo')
           .then((res: any) => {
-            console.log('Así llega la respuesta de la IA:', this.resIa);
             this.resIa = res;
             if (this.resIa) {
               this.speechService.convertTextToSpeech(this.resIa);
-         this.fileYes = false;
-
+              this.fileYes = false;
             }
-            if (this.resIa) {
+            if (this.resIa && this.emotionDetector) {
               this.getFeeling(this.resIa);
             }
           });
@@ -134,6 +135,10 @@ export class VoiceButtonComponent {
         this.myForm.patchValue({ message: '' });
       }
     }
+  }
+
+  emotionDetection() {
+    this.emotionDetector = !this.emotionDetector;
   }
 
   getFeeling(message: string) {

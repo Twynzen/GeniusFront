@@ -34,7 +34,6 @@ export class EmotionDetectorService {
       ]
     })
     console.log(completPromt, "Prompt detector de emociones");
-    let memoryConversation: string = '';
     let resIA: string = response.data.choices[0].message?.content!
 
     console.log(response.data, "respuesta de emoción catalogada");

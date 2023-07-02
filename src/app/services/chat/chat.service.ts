@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import { environment } from '../../environments/environment';
 import { SECRET_PROMPT } from '../../constants/secret-prompt';
 import { engines } from '../../constants/engines';
+import { MemoryService } from '../memory/memory.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class ChatService {
   memoryCount: number = 0;
   count = 0;
 
-  constructor() {}
+  constructor(private memoryService: MemoryService) {}
 
   get startProcess$() {
     return this.startProcess.asObservable();
@@ -51,13 +52,24 @@ export class ChatService {
   async gptTurboEngine(prompt: string, context: string): Promise<string> {
     this.startProcess.next();
     this.showAnimation = true;
+    let shouldGreet = false;
 
-    const completePrompt: string = context + prompt + this.conversationMemory;
+    if (this.count>=2) {
+      shouldGreet = true;
+    }
+    const systemMessage = shouldGreet
+      ? `${context}`
+      : `${context} Continue the conversation with the user. Remember, you have already greeted the user. DO NOT greet him`;
+    const completePrompt: string = prompt + this.conversationMemory;
 
     try {
       const response = await this.openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
         messages: [
+          {
+            role: 'system',
+            content: systemMessage,
+          },
           {
             role: 'user',
             content: completePrompt,
@@ -69,19 +81,31 @@ export class ChatService {
       //eliminar promtp para la memoria
       this.updateConversationMemory(prompt, aiResponse);
       this.showAnimation = false;
+      this.count++;
+
       this.endProcess.next();
 
-      console.group('Request information');
-      console.log('CONTEXT:', context);
-      console.log('CURRENT PROMPT:', prompt);
-      console.log('CURRENT MEMORY:', this.memoryCount, this.conversationMemory);
-      console.log('AI RESPONSE:', aiResponse);
+      console.group(
+        '%cRequest information',
+        'color: green; font-weight: bold;'
+      );
+      console.log('%cCONTEXT:', 'color: blue;', context);
+      console.log('%cCURRENT PROMPT:', 'color: blue;', prompt);
+      console.log(
+        '%cCURRENT MEMORY:',
+        'color: blue;',
+        this.memoryCount,
+        this.conversationMemory
+      );
+      console.log('%cAI RESPONSE:', 'color: blue;', aiResponse);
       console.groupEnd();
 
       return aiResponse;
     } catch (error) {
       console.error('Error while processing the GPT-3.5 Turbo engine:', error);
       this.showAnimation = false;
+      this.count++;
+
       this.endProcess.next();
       return 'Error al procesar la respuesta de la IA.';
     }
@@ -115,15 +139,20 @@ export class ChatService {
     }
   }
 
-  updateConversationMemory(memoryRemember: string, memoryResponseUser: string) {
+  async updateConversationMemory(
+    memoryRemember: string,
+    memoryResponseUser: string
+  ) {
     this.memoryCount += 1;
-    // en vez de sumar memoria, solicitar que se analice el pensamiento anterior para evolucionar
-    // debe evolucionar por cada memoria, no solo recordarla, usarla para definirse
+
+    // Analizar la conversación antes de agregarla a la memoria
+    const conversation = `[Usuario]: ${memoryRemember}\n[gpt-3.5-turbo]: ${memoryResponseUser}\n`;
+    const analysis = await this.memoryService.analyzeConversation(conversation);
+
+    // Agregar el análisis de la conversación a la memoria
     this.conversationMemory +=
-      'Analiza y aprende de tus anteriores conversaciones, para que la siguiente respuesta sea más inteligente: "';
-    //cambiar nombre usuario a instrucción de realidad
-    this.conversationMemory += `[Información sobre persepción de realidad]: ${memoryRemember}\n`;
-    this.conversationMemory += `[gpt-3.5-turbo]: ${memoryResponseUser}\n`;
-    this.conversationMemory += '"';
+      'Este es un analisis de tu anterior conversación, responde siempre teniendo presente este analisis: ////"';
+    this.conversationMemory += analysis;
+    this.conversationMemory += '"////';
   }
 }

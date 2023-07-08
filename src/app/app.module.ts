@@ -15,6 +15,7 @@ import { AlarmComponent } from './components/alarm/alarm.component';
 import { TwoBestOneComponent } from './components/two-best-one/two-best-one.component';
 import { FormatResponsePipe } from './pipes/format-response.pipe';
 import { BrainComponent } from './components/animations/brain/brain/brain.component';
+import { ModalSettingsComponent } from './components/voice-button/modal-settings/modal-settings/modal-settings.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { BrainComponent } from './components/animations/brain/brain/brain.compon
     TwoBestOneComponent,
     FormatResponsePipe,
     BrainComponent,
+    ModalSettingsComponent,
   ],
   imports: [
     BrowserModule,

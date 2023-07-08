@@ -5,6 +5,7 @@ import { ChatService } from '../../services/chat/chat.service';
 import { SECRET_PROMPT } from 'src/app/constants/secret-prompt';
 import { WhisperService } from 'src/app/services/whisper/whisper.service';
 import { TextToSpeechService } from 'src/app/services/textToSpeech/text-to-speech.service';
+import { CINEMA_PROMPT } from 'src/app/constants/cinema_prompt';
 
 @Component({
   selector: 'app-voice-button',
@@ -22,6 +23,10 @@ export class VoiceButtonComponent {
   record: boolean = false;
   recorder: any;
   fileYes: boolean = false;
+  showModal = false;
+  formGeniusSettings: any;
+  selectedPrompt: keyof typeof SECRET_PROMPT = 'SOYLA_BOT';
+  selectedPromptCinema: keyof typeof CINEMA_PROMPT = 'DARTH_VADER';
 
   constructor(
     private chatService: ChatService,
@@ -42,6 +47,18 @@ export class VoiceButtonComponent {
     this.chatService.endProcess$.subscribe(() => {
       this.showAnimation = false;
     });
+  }
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  saveData(data: any) {
+    this.selectedPrompt = data.selectedPrompt || 'SOYLA_BOT'; // Extrae selectedPrompt de los datos del formulario, o usa 'SOYLA_BOT' como valor predeterminado si no se proporcionó selectedPrompt
   }
 
   recording() {
@@ -96,7 +113,6 @@ export class VoiceButtonComponent {
   }
 
   playRecordedAudio() {
-
     if (this.audioFile) {
       // Crear una nueva URL de objeto para el archivo de audio
       const audioURL = URL.createObjectURL(this.audioFile);
@@ -118,7 +134,7 @@ export class VoiceButtonComponent {
       // Si no hay una grabación de audio pendiente, enviar el mensaje de texto
       const messageToSend = message || this.myForm.get('message')?.value;
       if (messageToSend) {
-        const context = SECRET_PROMPT.SOYLA_BOT;
+        const context = SECRET_PROMPT[this.selectedPrompt];
         this.chatService
           .sendMessage(messageToSend, context, 'gpt-3.5-turbo')
           .then((res: any) => {

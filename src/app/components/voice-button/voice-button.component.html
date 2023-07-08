@@ -6,11 +6,12 @@
         <h2 class="text-lg font-semibold text-center block">Genius</h2>
         <button
           class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold
-          py-2 px-4 rounded inline-flex items-center">
+          py-2 px-4 rounded inline-flex items-center" (click)="openModal()">
           <span class="w-4 h-4 bg-cover bg-no-repeat mr-2 inline-block
             settings"></span>
           <span>Settings</span>
         </button>
+        <app-modal-settings *ngIf="showModal" (close)="closeModal()" (save)="saveData($event)"></app-modal-settings>
       </div>
       <div class="bg-gray-200 rounded-lg p-4">
         <div class="w-full h-full bg-gray-100 flex flex-col justify-end">

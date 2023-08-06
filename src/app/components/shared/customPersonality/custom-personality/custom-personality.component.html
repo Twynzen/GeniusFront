@@ -1,0 +1,113 @@
+<div [formGroup]="formGeniusSettings">
+  <div class="mt-4">
+    <label for="aiName">¿Cómo te gustaría llamar a tu IA?</label>
+    <input id="aiName" type="text" formControlName="aiName">
+  </div>
+  <div class="mt-4">
+    <label for="aiPurpose">¿Cuál te gustaría que fuera el propósito
+      principal de tu IA?</label>
+    <select id="aiPurpose" formControlName="aiPurpose">
+      <option value="productivity">Ayudarme a ser más productivo</option>
+      <option value="entertainment">Proporcionarme entretenimiento</option>
+      <option value="learning">Ayudarme a aprender cosas nuevas</option>
+      <option value="conversation">Ser un compañero de conversación</option>
+      <option value="other">Otro</option>
+    </select>
+  </div>
+  <div class="mt-4">
+    <label for="aiRelationship">¿Cómo describirías la relación ideal
+      entre tú y tu IA?</label>
+    <select id="aiRelationship" formControlName="aiRelationship">
+      <option value="assistant">Como un asistente personal</option>
+      <option value="friend">Como un amigo</option>
+      <option value="mentor">Como un mentor</option>
+      <option value="teammate">Como un compañero de equipo</option>
+      <option value="other">Otro</option>
+    </select>
+  </div>
+  <div class="mt-4">
+    <label for="personalityType">Si tu IA tuviera una personalidad
+      basada en los cuatro temperamentos clásicos, ¿cuál te gustaría
+      que fuera?</label>
+    <select id="personalityType" formControlName="personalityType">
+      <option value="phlegmatic">Flemático (tranquilo y confiable,
+        pero a veces puede ser lento y resistente al cambio)</option>
+      <option value="sanguine">Sanguíneo (entusiasta y activo, pero
+        a veces puede ser impulsivo)</option>
+      <option value="choleric">Colérico (decidido y productivo, pero
+        a veces puede ser corto de paciencia)</option>
+      <option value="melancholic">Melancólico (analítico y
+        detallista, pero a veces puede ser preocupado)</option>
+      <option value="other">Otro</option>
+    </select>
+  </div>
+  <div class="mt-4">
+    <label for="musicStyle">Si tuvieras que describir el estilo de
+      tu IA en términos de un género musical, ¿cuál sería?</label>
+    <select id="musicStyle" formControlName="musicStyle">
+      <option value="rock">Rock (energético y audaz)</option>
+      <option value="jazz">Jazz (tranquilo y sofisticado)</option>
+      <option value="pop">Pop (amigable y accesible)</option>
+      <option value="classical">Clásica (formal y elegante)</option>
+      <option value="other">Otro</option>
+    </select>
+  </div>
+  <div class="mt-4">
+    <label for="drivingStyle">Imagina que tu IA es un coche. ¿Cómo
+      describirías su estilo de conducción?</label>
+    <select id="drivingStyle" formControlName="drivingStyle">
+      <option value="racer">Conduce como un piloto de carreras
+        (rápido y emocionante)</option>
+      <option value="safe">Conduce de manera segura y constante
+        (confiable y predecible)</option>
+      <option value="slow">Prefiere el carril lento y disfruta del
+        paisaje (tranquilo y relajado)</option>
+      <option value="other">Otro</option>
+    </select>
+  </div>
+  <div class="mt-4">
+    <label for="animalType">Si tu IA fuera un animal, ¿cuál sería y
+      por qué?</label>
+    <input id="animalType" type="text" formControlName="animalType">
+  </div>
+  <div class="mt-4">
+    <label for="reactionWhenSad">¿Cómo te gustaría que tu IA
+      reaccione cuando estás triste?</label>
+    <select id="reactionWhenSad" formControlName="reactionWhenSad">
+      <option value="jokes">Intenta animarme con chistes</option>
+      <option value="comfort">Me ofrece palabras de consuelo</option>
+      <option value="silence">Me da espacio y se mantiene en
+        silencio</option>
+      <option value="other">Otro</option>
+    </select>
+  </div>
+  <div class="mt-4">
+    <label for="superpower">Si tu IA tuviera un superpoder, ¿cuál te
+      gustaría que fuera?</label>
+    <select id="superpower" formControlName="superpower">
+      <option value="mindReading">Leer mentes</option>
+      <option value="timeTravel">Viajar en el tiempo</option>
+      <option value="invisibility">Invisibilidad</option>
+      <option value="superintelligence">Superinteligencia</option>
+      <option value="other">Otro</option>
+    </select>
+  </div>
+  <div class="mt-4">
+    <label for="humorImportance">En una escala del 1 al 5, ¿cómo de
+      importante es para ti que tu IA tenga un sentido del humor?</label>
+    <input id="humorImportance" type="number" min="1" max="5"
+      formControlName="humorImportance">
+  </div>
+  <div class="mt-4">
+    <label for="celebrationStyle">¿Cómo te gustaría que tu IA
+      celebre tus logros contigo?</label>
+    <select id="celebrationStyle" formControlName="celebrationStyle">
+      <option value="enthusiastic">Con un mensaje de felicitación
+        entusiasta</option>
+      <option value="calm">Con un mensaje de felicitación tranquilo
+        y sincero</option>
+      <option value="joke">Con una broma o un chiste</option>
+      <option value="other">Otro</option>
+    </select>
+  </div>
+</div>

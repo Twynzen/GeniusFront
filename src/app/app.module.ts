@@ -16,6 +16,7 @@ import { TwoBestOneComponent } from './components/two-best-one/two-best-one.comp
 import { FormatResponsePipe } from './pipes/format-response.pipe';
 import { BrainComponent } from './components/animations/brain/brain/brain.component';
 import { ModalSettingsComponent } from './components/voice-button/modal-settings/modal-settings/modal-settings.component';
+import { CustomPersonalityComponent } from './components/shared/customPersonality/custom-personality/custom-personality.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ModalSettingsComponent } from './components/voice-button/modal-settings
     FormatResponsePipe,
     BrainComponent,
     ModalSettingsComponent,
+    CustomPersonalityComponent,
   ],
   imports: [
     BrowserModule,

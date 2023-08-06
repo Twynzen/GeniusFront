@@ -22,11 +22,13 @@ export class AlarmComponent implements OnInit {
   alarmTime: string | null = '';
   alarms: AlarmInfo[] = [];
   private alarmSound: any;
+  showModal = false;
+  selectedPrompt: keyof typeof SECRET_PROMPT = 'SOYLA_BOT';
 
-  constructor(private chatService: ChatService,
+  constructor(
+    private chatService: ChatService,
     private speechService: TextToSpeechService
-
-    ) {
+  ) {
     this.alarmSound = new Audio();
     this.alarmSound.src = 'assets/sounds/alarm.mp3'; // Asegúrate de que esta ruta apunta a tu archivo de audio
     this.alarmSound.load();
@@ -39,6 +41,19 @@ export class AlarmComponent implements OnInit {
       this.checkAlarm();
     });
   }
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  saveData(data: any) {
+    this.selectedPrompt = data.selectedPrompt || 'SOYLA_BOT'; // Extrae selectedPrompt de los datos del formulario, o usa 'SOYLA_BOT' como valor predeterminado si no se proporcionó selectedPrompt
+  }
+
   getCurrentTime(): string {
     const now = new Date();
     let hours = now.getHours();

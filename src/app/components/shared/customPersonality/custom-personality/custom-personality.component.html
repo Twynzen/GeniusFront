@@ -12,6 +12,9 @@
       <option value="learning">Ayudarme a aprender cosas nuevas</option>
       <option value="conversation">Ser un compañero de conversación</option>
       <option value="other">Otro</option>
+      <input *ngIf="formGeniusSettings.get('aiPurpose')?.value === 'other'"
+        id="aiPurposeOther" type="text" placeholder="Especifica el propósito"
+        formControlName="aiPurposeOther">
     </select>
   </div>
   <div class="mt-4">
@@ -23,6 +26,10 @@
       <option value="mentor">Como un mentor</option>
       <option value="teammate">Como un compañero de equipo</option>
       <option value="other">Otro</option>
+      <input *ngIf="formGeniusSettings.get('aiRelationship')?.value === 'other'"
+        id="aiRelationshipOther" type="text"
+        placeholder="Especifica la relación"
+        formControlName="aiRelationshipOther">
     </select>
   </div>
   <div class="mt-4">
@@ -39,6 +46,8 @@
       <option value="melancholic">Melancólico (analítico y
         detallista, pero a veces puede ser preocupado)</option>
       <option value="other">Otro</option>
+      <input *ngIf="formGeniusSettings.get('personalityType')?.value === 'other'" id="personalityTypeOther" type="text" placeholder="Especifica la personalidad" formControlName="personalityTypeOther">
+
     </select>
   </div>
   <div class="mt-4">
@@ -50,6 +59,7 @@
       <option value="pop">Pop (amigable y accesible)</option>
       <option value="classical">Clásica (formal y elegante)</option>
       <option value="other">Otro</option>
+      <input *ngIf="formGeniusSettings.get('musicStyle')?.value === 'other'" id="musicStyleOther" type="text" placeholder="Especifica el género musical" formControlName="musicStyleOther">
     </select>
   </div>
   <div class="mt-4">
@@ -63,6 +73,7 @@
       <option value="slow">Prefiere el carril lento y disfruta del
         paisaje (tranquilo y relajado)</option>
       <option value="other">Otro</option>
+      <input *ngIf="formGeniusSettings.get('drivingStyle')?.value === 'other'" id="drivingStyleOther" type="text" placeholder="Especifica el estilo de conducción" formControlName="drivingStyleOther">
     </select>
   </div>
   <div class="mt-4">
@@ -79,6 +90,7 @@
       <option value="silence">Me da espacio y se mantiene en
         silencio</option>
       <option value="other">Otro</option>
+       <input *ngIf="formGeniusSettings.get('reactionWhenSad')?.value === 'other'" id="reactionWhenSadOther" type="text" placeholder="Especifica la reacción" formControlName="reactionWhenSadOther">
     </select>
   </div>
   <div class="mt-4">
@@ -90,6 +102,7 @@
       <option value="invisibility">Invisibilidad</option>
       <option value="superintelligence">Superinteligencia</option>
       <option value="other">Otro</option>
+        <input *ngIf="formGeniusSettings.get('superpower')?.value === 'other'" id="superpowerOther" type="text" placeholder="Especifica el superpoder" formControlName="superpowerOther">
     </select>
   </div>
   <div class="mt-4">
@@ -108,6 +121,7 @@
         y sincero</option>
       <option value="joke">Con una broma o un chiste</option>
       <option value="other">Otro</option>
+      <input *ngIf="formGeniusSettings.get('celebrationStyle')?.value === 'other'" id="celebrationStyleOther" type="text" placeholder="Especifica cómo celebra" formControlName="celebrationStyleOther">
     </select>
   </div>
 </div>

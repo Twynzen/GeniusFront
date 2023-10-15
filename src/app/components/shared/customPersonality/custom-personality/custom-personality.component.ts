@@ -14,21 +14,30 @@ export class CustomPersonalityComponent {
     this.formGeniusSettings = this.fb.group({
       aiName: [''],
       aiPurpose: [''],
+      aiPurposeOther: [''],
       aiRelationship: [''],
+      aiRelationshipOther: [''],
       personalityType: [''],
+      personalityTypeOther: [''],
       musicStyle: [''],
+      musicStyleOther: [''],
       drivingStyle: [''],
+      drivingStyleOther: [''],
       animalType: [''],
       reactionWhenSad: [''],
+      reactionWhenSadOther: [''],
       superpower: [''],
+      superpowerOther: [''],
       humorImportance: [''],
       celebrationStyle: [''],
+      celebrationStyleOther: [''],
     });
   }
 
   ngOnInit() {
     this.getForm();
   }
+
   getForm() {
     this.formService.currentForm.subscribe((form) => {
       if (form instanceof FormGroup) {

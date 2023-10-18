@@ -49,4 +49,10 @@ export class CustomPersonalityComponent {
       }
     });
   }
+
+  isOtherSelected(controlName: string): boolean {
+    let other = this.formGeniusSettings.get(controlName)?.value === 'other';
+
+    return other;
+  }
 }
